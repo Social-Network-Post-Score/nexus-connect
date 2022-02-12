@@ -1,26 +1,38 @@
-.container{
-    background: linear-gradient(180deg, rgba(240,255,255,1) 0%, rgba(255,255,255,1) 100%);
+@font-face {
+  font-family: "Gilroy";
+  src: local("Gilroy"), url("./fonts/Gilroy-Light.otf") format("truetype");
+  font-weight: normal;
 }
 
-.detailsContainer{
-    padding: 40px;
+.container {
+  /* background: linear-gradient(
+    180deg,
+    rgba(240, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  ); */
 }
 
-.heading{
-    font-size: 36px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #003366;
+.detailsContainer {
+  padding: 50px 40px;
 }
 
-.text{
-    color: #0F5298;
-    font-size: 18px;
+.heading {
+  font-size: 5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #000000;
+  font-family: Gilroy;
+  text-align: left;
 }
 
-.teamContainer{
-    display: flex;
-    justify-content: space-around;
-    padding-bottom: 20px;
+.text {
+  color: #0f5298;
+  font-size: 18px;
+  text-align: left;
 }
 
+.teamContainer {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 20px;
+}

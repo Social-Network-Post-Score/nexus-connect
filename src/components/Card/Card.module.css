@@ -1,23 +1,33 @@
-.imageContainer{
-    height: 260px;
-    width: 260px;
+.imageContainer {
+  height: 260px;
+  width: 260px;
 }
 
-.imageContainer img{
-    height: 100%;
-    width: 100%;
+.imageContainer img {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
 }
 
-.container{
-    width: 260px;
+.container {
+  width: 260px;
+  cursor: pointer;
 }
 
-.name{
-    font-size: 18px;
-    margin-bottom: 5px;
-    margin-top: 10px;
+.container:hover {
+  color: blue;
+  transform: scale(1.01);
 }
 
-.desig{
-    font-size: 16px;
+.name {
+  font-size: 18px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.desig {
+  font-size: 16px;
+  text-align: left;
+  width: 90%;
 }
