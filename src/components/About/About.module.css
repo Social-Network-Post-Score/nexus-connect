@@ -1,0 +1,26 @@
+.container{
+    background: linear-gradient(180deg, rgba(240,255,255,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.detailsContainer{
+    padding: 40px;
+}
+
+.heading{
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.text{
+    color: #0F5298;
+    font-size: 18px;
+}
+
+.teamContainer{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 20px;
+}
+

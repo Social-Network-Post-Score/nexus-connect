@@ -1,0 +1,56 @@
+.rem{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.rem p{
+    font-weight: 600;
+    color: rgba(128, 128, 128, 0.815);
+}
+
+.rem p:hover{
+    cursor: pointer;
+}
+
+.headers{
+    margin-bottom: 40px;
+}
+
+.headers h1{
+    color: rgb(2,48,71);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.headers p{
+    font-weight: 600;
+    color: rgba(128, 128, 128, 0.815);
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    top: 25%
+}
+
+.signup{
+    padding-top: 15px;
+    font-weight: 600;
+    color: rgba(128, 128, 128, 0.815);
+}
+@media (max-width: 800px) {
+    .container{
+        top: 45%
+    }
+}
+
+@media (max-width:440px) {
+    .rem p{
+        font-size: 12px;
+    }
+    .container{
+        top: 45%
+    }
+}

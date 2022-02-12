@@ -1,0 +1,23 @@
+.imageContainer{
+    height: 260px;
+    width: 260px;
+}
+
+.imageContainer img{
+    height: 100%;
+    width: 100%;
+}
+
+.container{
+    width: 260px;
+}
+
+.name{
+    font-size: 18px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.desig{
+    font-size: 16px;
+}

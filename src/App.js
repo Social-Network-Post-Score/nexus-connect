@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import LandingPage from './components/LandingPage/LandingPage';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Login from './components/LoginPage/Login';
+import SignUp from './components/SignUpPage/Signup';
+import About from './components/About/About';
 
 function App() {
+  const success = () => toast.success('Login Successful!!')
+  const fail = (err) => toast.error(err)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Switch>
+      <Route exact path="/"><LandingPage/></Route>
+      <Route exact path="/signup" success={success} fail={fail}><SignUp/></Route>
+      <Route exact path="/login" success={success} fail={fail}><Login/></Route>
+      <Route exact path="/about"><About/></Route>
+    </Switch>
+    <ToastContainer theme='colored'/>
     </div>
   );
 }
