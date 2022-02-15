@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/LoginPage/Login';
 import SignUp from './components/SignUpPage/Signup';
 import About from './components/About/About';
+import Posts from './components/Posts/Posts';
 
 function App() {
   const success = () => toast.success('Login Successful!!')
@@ -18,6 +19,7 @@ function App() {
       <Route exact path="/signup" success={success} fail={fail}><SignUp/></Route>
       <Route exact path="/login" success={success} fail={fail}><Login/></Route>
       <Route exact path="/about"><About/></Route>
+      <Route exact path="/posts"><Posts/></Route>
     </Switch>
     <ToastContainer theme='colored'/>
     </div>

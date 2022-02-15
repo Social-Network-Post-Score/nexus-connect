@@ -1,0 +1,43 @@
+.container{
+    border: 1px solid rgba(0,0,0,0.1);
+    width: 40%;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+}
+
+.imageContainer{
+    width: 12%;
+}
+
+.image{
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(128, 128, 128, 0.247);
+}
+
+.postContainer{
+    width: 88%;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.name{
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.createdAt{
+    font-size: 14px;
+    color: rgba(0,0,0,0.5);
+}
+
+.container:hover{
+    background-color: rgba(128, 128, 128, 0.116);
+}
+
+.image:hover{
+    transform: scale(1.08);
+    background-color: rgba(128, 128, 128, 0.411);
+}

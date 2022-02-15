@@ -1,0 +1,30 @@
+.textarea{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    resize: none;
+    outline: none;
+    font-size: 18px;
+    color: rgba(0,0,0,0.5);
+}
+.textarea::placeholder{
+    color: rgba(0,0,0,0.5);
+}
+.textarea:focus{
+    outline: none;
+}
+
+.container{
+    width: 40%;
+    margin: 10px auto 0 auto;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 10px;
+}
+
+.btnStyling{
+    margin-top: 10px;
+}
+
+.btnDiv{
+    text-align: right;
+}

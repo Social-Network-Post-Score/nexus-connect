@@ -4,13 +4,13 @@
   font-weight: normal;
 }
 
-.container {
-  /* background: linear-gradient(
+/* .container {
+   background: linear-gradient(
     180deg,
     rgba(240, 255, 255, 1) 0%,
     rgba(255, 255, 255, 1) 100%
-  ); */
-}
+  ); 
+}*/
 
 .detailsContainer {
   padding: 50px 40px;
