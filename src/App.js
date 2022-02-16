@@ -8,6 +8,7 @@ import Login from './components/LoginPage/Login';
 import SignUp from './components/SignUpPage/Signup';
 import About from './components/About/About';
 import Posts from './components/Posts/Posts';
+import Profile from './components/Profile/Profile';
 
 function App() {
   const success = () => toast.success('Login Successful!!')
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/login" success={success} fail={fail}><Login/></Route>
       <Route exact path="/about"><About/></Route>
       <Route exact path="/posts"><Posts/></Route>
+      <Route exact path="/profile"><Profile/></Route>
     </Switch>
     <ToastContainer theme='colored'/>
     </div>

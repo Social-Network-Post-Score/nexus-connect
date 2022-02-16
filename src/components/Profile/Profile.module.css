@@ -1,0 +1,120 @@
+div {
+  box-sizing: border-box;
+}
+.mainContainer {
+  width: 70%;
+  margin: auto;
+  padding: 8px;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.userInfo {
+  width: 100%;
+  padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+
+  border-left: 2px solid #3c99dc;
+}
+
+.userInfo h1 {
+  margin: 0;
+}
+
+.userInfo p {
+  margin: 0;
+}
+
+.userImage {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+  padding: 8px;
+  align-items: right;
+
+  background: url("./userbackground.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.userImage img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.userDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.editButton {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-radius: 2px;
+  border: 0.5px solid white;
+  padding: 8px 2px;
+}
+
+.friendsContainer {
+  width: 30%;
+  height: 400px;
+  border-radius: 8px;
+  border: 2px solid whitesmoke;
+  box-shadow: 8px;
+  margin-right: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.friendsHeading {
+  background-color: #f0ffff;
+  margin-bottom: 8px;
+  border-bottom: 2px solid #3c99dc;
+}
+
+.friendsHeading h2 {
+  color: #3c99dc;
+}
+
+.postsContainer {
+  width: 70%;
+  border-radius: 8px;
+  border: 2px solid whitesmoke;
+  box-shadow: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.postsHeading {
+  background-color: #f0ffff;
+  margin-bottom: 8px;
+  border-bottom: 2px solid #3c99dc;
+  color: #3c99dc;
+}
+
+.postsHeading h2 {
+  color: #3c99dc;
+}
+.posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 16px;
+}
