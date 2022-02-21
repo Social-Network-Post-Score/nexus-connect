@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReadMoreReact from 'read-more-react';
 import styles from './PostBody.module.css'
 
-function PostBody({post}) {
+function PostBody(props) {
     const [upvoteHover, setupvoteHover] = useState(false)
     const [downvoteHover, setdownvoteHover] = useState(false)
     const [commentHover, setcommentHover] = useState(false)
@@ -10,12 +10,14 @@ function PostBody({post}) {
     const [upVoteSelected, setupVoteSelected] = useState(false)
     const [downVoteSelected, setdownVoteSelected] = useState(false)
 
+    const {post} = props;
+
     let time = post.createdAt.split('T')
     time[1] = time[1].substr(0,time[1].length-5)
     time[0] = time[0].split('-')
     time[0] = time[0][2]+'-'+time[0][1]+'-'+time[0][0]
     return ( 
-        <div className={styles.container}>
+        <div style={props.style} className={styles.container}>
             <div className={styles.imageContainer}>
                 <div className={styles.image}>
                     <img src={post.creatorImage} alt='random'/>
