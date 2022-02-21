@@ -3,7 +3,7 @@ import styles from './Login.module.css';
 import LandingImage from './landing.png'
 import LoginForm from './LoginForm/LoginForm';
 
-function LandingPage(props) {
+function Login(props) {
     return ( 
         <div>
             <div className={styles.container}>
@@ -18,4 +18,4 @@ function LandingPage(props) {
      );
 }
 
-export default LandingPage;
+export default Login;

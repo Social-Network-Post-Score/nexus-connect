@@ -1,17 +1,23 @@
 import { Button } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
 import React, { useState } from 'react'
 import styles from './CreatePost.module.css'
 
-function CreatePost() {
+function CreatePost(props) {
     const [post, setpost] = useState('')
+
+    const handlePost = () => {
+        props.createPost(post);
+        setpost('')
+    }
     return ( 
         <div className={styles.container}>
-            <TextArea 
+            <textarea
+                id="postbox" 
                 className={styles.textarea} 
                 rows={5} 
                 placeholder="What's on your mind ?" 
                 onChange={(e)=>setpost(e.target.value)}
+                value={post}
             />
             <div className={styles.btnDiv}>
                 <Button 
@@ -20,6 +26,7 @@ function CreatePost() {
                     shape='round' 
                     className={styles.btnStyling} 
                     disabled={post.length===0}
+                    onClick = {handlePost}
                 >
                     Post
                 </Button>

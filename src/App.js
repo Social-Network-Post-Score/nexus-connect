@@ -11,16 +11,19 @@ import Posts from './components/Posts/Posts';
 import Profile from './components/Profile/Profile';
 
 function App() {
-  const success = () => toast.success('Login Successful!!')
+  const success = (type) => type==='l'?toast.success('Login Successful!!'):toast.success('Signup Successful!!')
   const fail = (err) => toast.error(err)
+  const postSuccess = () => toast.success('Post Created Successfully')
+  const failedAuthentication = () => toast.warn('Please login to see posts')
+
   return (
     <div className="App">
     <Switch>
       <Route exact path="/"><LandingPage/></Route>
-      <Route exact path="/signup" success={success} fail={fail}><SignUp/></Route>
-      <Route exact path="/login" success={success} fail={fail}><Login/></Route>
+      <Route exact path="/signup"><SignUp success={success} fail={fail}/></Route>
+      <Route exact path="/login"><Login success={success} fail={fail}/></Route>
       <Route exact path="/about"><About/></Route>
-      <Route exact path="/posts"><Posts/></Route>
+      <Route exact path="/posts"><Posts postSuccess={postSuccess} failedAuthentication={failedAuthentication}/></Route>
       <Route exact path="/profile"><Profile/></Route>
     </Switch>
     <ToastContainer theme='colored'/>
