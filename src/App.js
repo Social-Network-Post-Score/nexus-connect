@@ -24,7 +24,7 @@ function App() {
       <Route exact path="/login"><Login success={success} fail={fail}/></Route>
       <Route exact path="/about"><About/></Route>
       <Route exact path="/posts"><Posts postSuccess={postSuccess} failedAuthentication={failedAuthentication}/></Route>
-      <Route exact path="/profile"><Profile/></Route>
+      <Route exact path="/profile"><Profile  failedAuthentication={failedAuthentication}/></Route>
     </Switch>
     <ToastContainer theme='colored'/>
     </div>
