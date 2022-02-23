@@ -46,14 +46,13 @@ export default function Profile(props) {
               <div style={{width:"60%"}}>
                 <h1>{user.name}</h1>
                 <p style={{marginBottom:"8px"}}>{user.email}</p>
-                {/* <p>I am a fourth year student at TIU. I am full stack web developer. I work on React and Spring Boot. My hobbies are watching sci-fi,comics,anime.My dream is to travel the world and eat all cusines.</p> */}
+                <p>Hey there! I am using Nexus Connect. :)</p>
               </div>
                 <div className={classes.editButton}>
-                  {/* <div>
-                  <p>Techno India University</p>
-                  <p>Kolkata, India</p>
-                  <Link to="">Edit Profile</Link>
-                </div> */}
+                  <div>
+                    <p>Techno India University</p>
+                    <p>Kolkata, India</p>
+                  </div>
                 </div>
               </div>
             </div>
