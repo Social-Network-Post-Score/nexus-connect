@@ -14,9 +14,8 @@ export default function Profile(props) {
   const [posts,setPosts] = useState([]);
   const history = useHistory();
 
-  const fetchPostUrl = `https://secret-castle-58335.herokuapp.com/api/posts/user/${user._id}`;
-
   const fetchPosts = async() => {
+    const fetchPostUrl = `https://secret-castle-58335.herokuapp.com/api/posts/user/${user._id}`;
     const res = await axios.get(fetchPostUrl);
     console.log(res.data.posts);
     setPosts(res.data.posts);
@@ -37,7 +36,10 @@ export default function Profile(props) {
   return (
     <>
     <Header light/>
-    <div className={classes.mainContainer}>
+    {
+      user && 
+      <>
+         <div className={classes.mainContainer}>
         <div className={classes.userInfo}>
             <div className={classes.userImage}>
                 <img src={user.image} alt="user dp"></img>
@@ -73,6 +75,8 @@ export default function Profile(props) {
             </div>
           </div>
     </div>
+    </>
+    }
     </>
   )
 }
