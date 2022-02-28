@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReadMoreReact from 'read-more-react';
 import styles from './PostBody.module.css'
+import Loading from './loading.gif'
 
 function PostBody(props) {
     const [upvoteHover, setupvoteHover] = useState(false)
@@ -9,8 +10,34 @@ function PostBody(props) {
     const [reshareHover, setreshareHover] = useState(false)
     const [upVoteSelected, setupVoteSelected] = useState(false)
     const [downVoteSelected, setdownVoteSelected] = useState(false)
-
+    const [showComments, setShowComments] = useState(false)
+    const [err, setErr] = useState(null)
+    const [comment,setComment] = useState('')
+    const [clicked, setClicked] = useState(false)
+ 
     const {post} = props;
+
+    const handleClick = () => {
+        setClicked(true)
+        if(comment.length===0)
+        {
+            setErr('Please type something')
+            setClicked(false)
+        }
+        else
+        {
+            setErr(null)
+            props.createComment(comment,post._id)
+            .then(()=>{
+                setClicked(false)
+                setComment('')
+            })
+        }
+    }
+
+    const handleComment = (e) => {
+        setComment(e.target.value)
+    }
 
     let time = post.createdAt.split('T')
     time[1] = time[1].substr(0,time[1].length-5)
@@ -58,12 +85,13 @@ function PostBody(props) {
                             alt="downvote"
                         />
                     </div>
-                    <div className={commentHover?styles.commentHover:styles.iconContainer}
+                    <div className={commentHover||showComments===true?styles.commentHover:styles.iconContainer}
                         onMouseEnter={()=>setcommentHover(true)} 
                         onMouseLeave={()=>setcommentHover(false)}
+                        onClick={()=>setShowComments(!showComments)}
                     >
                         <img 
-                            src={`https://img.icons8.com/external-sbts2018-outline-sbts2018/24/${commentHover?'1b7931':'6a6a6a'}/external-comment-social-media-basic-1-sbts2018-outline-sbts2018.png`}
+                            src={`https://img.icons8.com/external-sbts2018-outline-sbts2018/24/${commentHover||showComments===true?'1b7931':'6a6a6a'}/external-comment-social-media-basic-1-sbts2018-outline-sbts2018.png`}
                             alt="comment"
                         />
                     </div>
@@ -77,6 +105,24 @@ function PostBody(props) {
                         />
                     </div>
                 </div>
+                {
+                    showComments && 
+                    <div className={styles.commentBlock}>
+                        <textarea row={2} placeholder='Say Something....' className={styles.commentBox}
+                        onChange={(e)=>handleComment(e)}
+                        value={comment}
+                        />
+                        {
+                            err && <p className={styles.error}>{err}</p>
+                        }
+                        <div className={styles.sendContainer} onClick={handleClick}>
+                            {clicked===false ? <img className={styles.send} 
+                                src="https://img.icons8.com/external-prettycons-lineal-prettycons/49/000000/external-send-social-media-prettycons-lineal-prettycons.png" 
+                                alt='send'
+                            />:<img src={Loading} alt='loading' className={styles.loading}/>}
+                        </div>
+                    </div>
+                }
             </div>
         </div>
      );

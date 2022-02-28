@@ -11,6 +11,7 @@ function Posts(props) {
     const [allPosts, setallPosts] = useState([])
     const [loader, setLoader] = useState(false);
     const userData = JSON.parse(localStorage.getItem('user'))
+    console.log(userData)
     const history = useHistory()
     const createPost = async (body) => {
         const data = {
@@ -21,7 +22,7 @@ function Posts(props) {
         await axios.post('https://secret-castle-58335.herokuapp.com/api/posts',data)
         .then(()=>{
             props.postSuccess()
-            setTimeout(()=>window.location.reload(),2000)
+            getPosts();
         })
         .catch((err)=>{
             console.log(err)
@@ -36,6 +37,19 @@ function Posts(props) {
             setLoader(false)
         })
         .catch(err=>console.log(err))
+    }
+
+    const createComment = async (content,postId) => {
+        const data = {
+            "content":content,
+            "creator":userData._id,
+            "creatorName":userData.name,
+            "post":postId
+        }
+        console.log(data);
+        await axios.post('http://secret-castle-58335.herokuapp.com/api/comments',data)
+        .then(()=>props.commentSuccess())
+        .catch((err)=>console.log(err))
     }
 
     useEffect(()=>{
@@ -67,7 +81,7 @@ function Posts(props) {
                 loader === false && allPosts.length===0 && <p className={styles.nopost}>No posts yet!</p>
             }
             {
-                allPosts.map(post=><PostBody post={post} key={post._id}/>)
+                allPosts.map(post=><PostBody post={post} key={post._id} createComment={createComment}/>)
             }
         </div>
      );
