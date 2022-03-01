@@ -9,6 +9,27 @@ function PostBody(props) {
     const [reshareHover, setreshareHover] = useState(false)
     const [upVoteSelected, setupVoteSelected] = useState(false)
     const [downVoteSelected, setdownVoteSelected] = useState(false)
+    const [upVotes, setUpVotes] = useState(0);
+    const [downVotes, setDownVotes] = useState(0);
+    
+    const upvoteHandler =()=>{
+        if(setupVoteSelected){
+            setUpVotes(upVotes+1)
+            setdownVoteSelected(false)
+            setDownVotes(0)
+        }
+      
+      }
+    const downvoteHandler =()=>{
+        if(setdownVoteSelected){
+            setDownVotes(downVotes+1)
+            setupVoteSelected(false)
+            setUpVotes(0)
+        }
+    }
+    
+
+
     return ( 
         <div style={props.style} className={styles.container}>
             <div className={styles.imageContainer}>
@@ -34,22 +55,24 @@ function PostBody(props) {
                     <div className={upvoteHover?styles.updownHover:styles.iconContainer}
                         onMouseEnter={()=>setupvoteHover(true)} 
                         onMouseLeave={()=>setupvoteHover(false)}
-                        onClick={()=>setupVoteSelected(true)}
+                        onClick={()=>[setupVoteSelected(true), upvoteHandler()]}
                     >
                         <img 
                             src={upVoteSelected?`https://img.icons8.com/external-those-icons-fill-those-icons/24/288cfb/external-up-arrows-those-icons-fill-those-icons-2.png`:`https://img.icons8.com/external-those-icons-lineal-those-icons/24/${upvoteHover?'288cfb':'6a6a6a'}/external-up-arrows-those-icons-lineal-those-icons-2.png` }
                             alt="upvote"
                         />
+                        <span className="postLikeCounter">{upVotes}</span>
                     </div>
                     <div className={downvoteHover?styles.updownHover:styles.iconContainer}
                         onMouseEnter={()=>setdownvoteHover(true)}
                         onMouseLeave={()=>setdownvoteHover(false)}
-                        onClick={()=>setdownVoteSelected(true)}
+                        onClick={()=>[setdownVoteSelected(true), downvoteHandler()]}
                     >
                         <img  
                             src={downVoteSelected?`https://img.icons8.com/external-kmg-design-glyph-kmg-design/32/288cfb/external-down-arrows-kmg-design-glyph-kmg-design-1.png`:`https://img.icons8.com/external-those-icons-lineal-those-icons/24/${downvoteHover?'288cfb':'6a6a6a'}/external-down-arrows-those-icons-lineal-those-icons-2.png`}
                             alt="downvote"
                         />
+                        <span className="postLikeCounter">{downVotes}</span>
                     </div>
                     <div className={commentHover?styles.commentHover:styles.iconContainer}
                         onMouseEnter={()=>setcommentHover(true)} 
