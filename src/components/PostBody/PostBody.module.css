@@ -93,7 +93,7 @@
 .commentBox{
     border: none;
     outline: none;
-    padding: 10px 10px 10px 2px;
+    padding: 10px;
     border-bottom: 1px solid black;
     width: 100%;
     resize: none;
@@ -110,7 +110,7 @@
 
 .sendContainer{
     text-align: right;
-    padding: 10px 10px 10px 0;
+    padding: 10px 10px 20px 0;
 }
 
 .error{
@@ -123,4 +123,10 @@
 .loading{
     height: 30px;
     width: 30px;
+}
+
+.nocomment{
+    text-align: center;
+    color: rgba(0,0,0,0.6);
+    font-weight: 600;
 }

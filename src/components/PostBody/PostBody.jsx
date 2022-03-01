@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReadMoreReact from 'read-more-react';
 import styles from './PostBody.module.css'
 import Loading from './loading.gif'
+import CommentBody from '../CommentBody/CommentBody';
 
 function PostBody(props) {
     const [upvoteHover, setupvoteHover] = useState(false)
@@ -31,6 +32,7 @@ function PostBody(props) {
             .then(()=>{
                 setClicked(false)
                 setComment('')
+                props.getPostById(post._id)
             })
         }
     }
@@ -121,6 +123,9 @@ function PostBody(props) {
                                 alt='send'
                             />:<img src={Loading} alt='loading' className={styles.loading}/>}
                         </div>
+                        {
+                            post.comment.length > 0 ? post.comment.map(comment=><CommentBody comment={comment}/>): <p className={styles.nocomment}>No Comments Yet !</p>
+                        }
                     </div>
                 }
             </div>

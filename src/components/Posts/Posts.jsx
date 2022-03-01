@@ -11,7 +11,6 @@ function Posts(props) {
     const [allPosts, setallPosts] = useState([])
     const [loader, setLoader] = useState(false);
     const userData = JSON.parse(localStorage.getItem('user'))
-    console.log(userData)
     const history = useHistory()
     const createPost = async (body) => {
         const data = {
@@ -35,6 +34,15 @@ function Posts(props) {
         .then((res)=>{
             setallPosts(res.data.data.reverse())
             setLoader(false)
+        })
+        .catch(err=>console.log(err))
+    }
+
+    const getPostById = async (id) => {
+        await axios.get(`https://secret-castle-58335.herokuapp.com/api/posts/${id}`)
+        .then((res)=>{
+            console.log(res.data.post)
+            // setLoader(false)
         })
         .catch(err=>console.log(err))
     }
@@ -81,7 +89,7 @@ function Posts(props) {
                 loader === false && allPosts.length===0 && <p className={styles.nopost}>No posts yet!</p>
             }
             {
-                allPosts.map(post=><PostBody post={post} key={post._id} createComment={createComment}/>)
+                allPosts.map(post=><PostBody post={post} key={post._id} createComment={createComment} getPostById={getPostById}/>)
             }
         </div>
      );
