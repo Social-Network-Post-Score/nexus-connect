@@ -81,3 +81,16 @@
     font-size: 18px;
     padding: 21px 10px;
 }
+
+.btnStyling{
+    background-color: #f0ffff;
+    color : #72a0c1;
+    border: none;
+    outline: none;
+    padding: 21px 10px
+}
+.btnStyling:hover{
+    color: #d5f3fe;
+    background-color: #72a0c1;
+    cursor: pointer;
+}

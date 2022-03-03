@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import ReadMoreReact from 'read-more-react';
 import styles from './PostBody.module.css'
+import Loading from './loading.gif'
+import CommentBody from '../CommentBody/CommentBody';
 
 function PostBody(props) {
     const [upvoteHover, setupvoteHover] = useState(false)
@@ -28,23 +30,56 @@ function PostBody(props) {
         }
     }
     
+    const [showComments, setShowComments] = useState(false)
+    const [err, setErr] = useState(null)
+    const [comment,setComment] = useState('')
+    const [clicked, setClicked] = useState(false)
+ 
+    const {post} = props;
 
+    const handleClick = () => {
+        setClicked(true)
+        if(comment.length===0)
+        {
+            setErr('Please type something')
+            setClicked(false)
+        }
+        else
+        {
+            setErr(null)
+            props.createComment(comment,post._id)
+            .then(()=>{
+                setClicked(false)
+                setComment('')
+                props.getPostById(post._id)
+            })
+        }
+    }
 
+    const handleComment = (e) => {
+        setComment(e.target.value)
+    }
+
+    let time = post.createdAt.split('T')
+    time[1] = time[1].substr(0,time[1].length-5)
+    time[0] = time[0].split('-')
+    time[0] = time[0][2]+'-'+time[0][1]+'-'+time[0][0]
+  
     return ( 
         <div style={props.style} className={styles.container}>
             <div className={styles.imageContainer}>
                 <div className={styles.image}>
-                    <img src={`https://robohash.org/${Math.random()}.png?size=70x70&set=set2`} alt='random'/>
+                    <img src={post.creatorImage} alt='random'/>
                 </div>
             </div>
             <div className={styles.postContainer}>
                 <div>
-                    <p className={styles.name}><b>Milan Shawn</b></p>
-                    <p className={styles.createdAt}>Created At: 19/01/2022 20:00:24</p>
+                    <p className={styles.name}><b>{post.creatorName}</b></p>
+                    <p className={styles.createdAt}>Created At: {time[0]}&nbsp;&nbsp;{time[1]}</p>
                 </div>
                 <div>
                     <ReadMoreReact 
-                        text={'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora ipsam nam repellendus omnis optio est similique laboriosam expedita amet obcaecati temporibus veritatis illo sed nostrum earum illum ullam enim reprehenderit velit vel modi voluptas, error perferendis? Amet quaerat vitae totam tempore veniam dolor dolorem, nulla fugit, eum omnis aperiam ratione.'}
+                        text={post.description}
                         min = {250}
                         ideal = {270}
                         max = {300}
@@ -74,12 +109,13 @@ function PostBody(props) {
                         />
                         <span className="postLikeCounter">{downVotes}</span>
                     </div>
-                    <div className={commentHover?styles.commentHover:styles.iconContainer}
+                    <div className={commentHover||showComments===true?styles.commentHover:styles.iconContainer}
                         onMouseEnter={()=>setcommentHover(true)} 
                         onMouseLeave={()=>setcommentHover(false)}
+                        onClick={()=>setShowComments(!showComments)}
                     >
                         <img 
-                            src={`https://img.icons8.com/external-sbts2018-outline-sbts2018/24/${commentHover?'1b7931':'6a6a6a'}/external-comment-social-media-basic-1-sbts2018-outline-sbts2018.png`}
+                            src={`https://img.icons8.com/external-sbts2018-outline-sbts2018/24/${commentHover||showComments===true?'1b7931':'6a6a6a'}/external-comment-social-media-basic-1-sbts2018-outline-sbts2018.png`}
                             alt="comment"
                         />
                     </div>
@@ -93,6 +129,27 @@ function PostBody(props) {
                         />
                     </div>
                 </div>
+                {
+                    showComments && 
+                    <div className={styles.commentBlock}>
+                        <textarea row={2} placeholder='Say Something....' className={styles.commentBox}
+                        onChange={(e)=>handleComment(e)}
+                        value={comment}
+                        />
+                        {
+                            err && <p className={styles.error}>{err}</p>
+                        }
+                        <div className={styles.sendContainer} onClick={handleClick}>
+                            {clicked===false ? <img className={styles.send} 
+                                src="https://img.icons8.com/external-prettycons-lineal-prettycons/49/000000/external-send-social-media-prettycons-lineal-prettycons.png" 
+                                alt='send'
+                            />:<img src={Loading} alt='loading' className={styles.loading}/>}
+                        </div>
+                        {
+                            post.comment.length > 0 ? post.comment.map(comment=><CommentBody comment={comment}/>): <p className={styles.nocomment}>No Comments Yet !</p>
+                        }
+                    </div>
+                }
             </div>
         </div>
      );

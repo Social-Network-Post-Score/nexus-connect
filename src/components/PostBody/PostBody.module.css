@@ -15,6 +15,13 @@
     overflow: hidden;
     border: 1px solid rgba(0,0,0,0.1);
     background-color: rgba(128, 128, 128, 0.247);
+    height: 70px;
+    width: 70px;
+}
+
+.image img{
+    height: 100%;
+    width: 100%;
 }
 
 .postContainer{
@@ -81,4 +88,45 @@
 .image:hover{
     transform: scale(1.08);
     background-color: rgba(128, 128, 128, 0.411);
+}
+
+.commentBox{
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    width: 100%;
+    resize: none;
+}
+
+.send{
+    height: 30px;
+    width: 30px;
+}
+
+.send:hover{
+    cursor: pointer;
+}
+
+.sendContainer{
+    text-align: right;
+    padding: 10px 10px 20px 0;
+}
+
+.error{
+    background-color: rgba(253, 199, 199, 0.87);
+    color: rgb(255, 75, 75);
+    padding: 10px 0;
+    text-align: center;
+}
+
+.loading{
+    height: 30px;
+    width: 30px;
+}
+
+.nocomment{
+    text-align: center;
+    color: rgba(0,0,0,0.6);
+    font-weight: 600;
 }
