@@ -102,14 +102,13 @@ function Header(props) {
             {dpClicked &&
             <div className={styles.dropDownContainer}>
                 <div className={styles.dropDownOptions}>
-                    <FontAwesomeIcon icon={faRightToBracket}/>
-                    <a onClick={handleSignOut}>Sign Out</a>
+                    <FontAwesomeIcon icon={faUser}/>
+                    <Link to="/profile">Profile</Link>
                 </div>
                 <div className={styles.dropDownOptions}>
-                    <div>
-                    <FontAwesomeIcon icon={faUser}/>
-                    </div>
-                    <div><Link to="/profile">Profile</Link></div>
+                    <FontAwesomeIcon icon={faRightToBracket}/>
+                    <a onClick={handleSignOut}>
+                        Logout</a>
                 </div>
             </div>
             }
