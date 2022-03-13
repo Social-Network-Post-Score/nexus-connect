@@ -87,7 +87,7 @@ function Header(props) {
                             </Link>
                             {userAvailable ? 
                                 <li className={styles.dpContainer} onClick={()=>setDpClicked(!dpClicked)}>
-                                    <img src={`https://robohash.org/${user.name}.png?size=60x60&set=set2`} alt="user dp" className={styles.userDp}></img>
+                                    <img src={`https://robohash.org/${user.name}.png?size=50x50&set=set2`} alt="user dp" className={styles.userDp}></img>
                                 </li>
                                 :
                             <Link to="/signup" className={styles.lightstyleManipulation}>
