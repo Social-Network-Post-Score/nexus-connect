@@ -3,12 +3,27 @@ import LogoDark from './logo_dark.png'
 import LogoLight from './logo_light.png'
 import styles from './Header.module.css'
 import { Link, useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightToBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function Header(props) {
+    const [user,setUser] = useState({});
+    const [dpClicked,setDpClicked] = useState(false);
+
+    console.log("header:",user);
+
     let location = useLocation();
     const history = useHistory();
     const userAvailable = localStorage.getItem('user') && Object.keys(JSON.parse(localStorage.getItem('user'))).length!==0;
+
+    useEffect(()=>{
+        let user = JSON.parse(localStorage.getItem('user'));
+        console.log(user);
+        setUser(user);
+    },[]);
+
     const handleSignOut = () => {
         localStorage.removeItem('user')
         history.replace('/')
@@ -71,8 +86,8 @@ function Header(props) {
                                 </li>
                             </Link>
                             {userAvailable ? 
-                                <li style={{padding:'0'}} onClick={handleSignOut}>
-                                    <button className={styles.btnStyling}>Sign Out</button>
+                                <li className={styles.dpContainer} onClick={()=>setDpClicked(!dpClicked)}>
+                                    <img src={`https://robohash.org/${user.name}.png?size=60x60&set=set2`} alt="user dp" className={styles.userDp}></img>
                                 </li>
                                 :
                             <Link to="/signup" className={styles.lightstyleManipulation}>
@@ -83,6 +98,20 @@ function Header(props) {
                         </ul>
                     </div>
                 </div>
+            }
+            {dpClicked &&
+            <div className={styles.dropDownContainer}>
+                <div className={styles.dropDownOptions}>
+                    <FontAwesomeIcon icon={faRightToBracket}/>
+                    <a onClick={handleSignOut}>Sign Out</a>
+                </div>
+                <div className={styles.dropDownOptions}>
+                    <div>
+                    <FontAwesomeIcon icon={faUser}/>
+                    </div>
+                    <div><Link to="/profile">Profile</Link></div>
+                </div>
+            </div>
             }
         </div>
      );
