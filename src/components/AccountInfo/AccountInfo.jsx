@@ -8,6 +8,7 @@ import { Bars } from 'react-loader-spinner';
 import * as Yup from "yup";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const AccountInfo = (props) => {
 
     const [loader,setLoader] = useState(false);
@@ -33,13 +34,11 @@ const AccountInfo = (props) => {
         email: Yup.string()
             .email('*Email is invalid')
             .required('*Required'),
-        dob:Yup.date().required("*Required"),
+        dob:Yup.date(),
         city:Yup.string()
-                .max(25,"*City name should be less than 25 chars")
-                .required("*Required"),
+                .max(25,"*City name should be less than 25 chars"),
         country: Yup.string()
-                    .max(25,"*Country name should be less that 25 characters")
-                    .required("*Required"),
+                    .max(25,"*Country name should be less that 25 characters"),
         college:Yup.string().required("*Required"),
         about:Yup.string()
                     .max(100,"*Description should not exceed 100 words")
@@ -54,11 +53,11 @@ const AccountInfo = (props) => {
                 .then((res)=>{
                     localStorage.setItem('user',JSON.stringify(res.data.user))
                     setLoader(false);
-                    alert("Updated Successfuly")
-                    history.push('/posts');
+                    toast.success("Updated Profile successfuly");
+                    history.push('/profile');
                 })
                 .catch((err)=>{
-                    alert("Failed to update user info");
+                    toast.error("Failed to update user info");
                     console.log(err);
                     }
                 )
@@ -66,7 +65,7 @@ const AccountInfo = (props) => {
         }
   return (
         <>        
-        <Header dark/>
+        <Header light/>
         <div style={{margin:'0 auto',width: '40%'}}>
                 {loader && 
                     <div style={{margin: '0 auto', width:'60px',paddingTop:'20px'}}>

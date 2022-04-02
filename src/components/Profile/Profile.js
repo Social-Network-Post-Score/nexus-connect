@@ -48,9 +48,10 @@ export default function Profile(props) {
               <div style={{width:"60%"}}>
                 <h1>{user.name}</h1>
                 <p style={{marginBottom:"8px"}}>{user.email}</p>
-                <p>Hey there! I am using Nexus Connect. :)</p>
+                <p>{user.about}</p>
               </div>
                 <div className={classes.editButton}>
+                  <Link to="/user/accountInfo">Edit Profile</Link>
                   <div>
                     <p>Techno India University</p>
                     <p>Kolkata, India</p>
