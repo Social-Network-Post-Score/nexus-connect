@@ -30,7 +30,7 @@ function App() {
       <Route exact path="/profile"><Profile/></Route>
       <Route exact path="/posts"><Posts postSuccess={postSuccess} failedAuthentication={failedAuthentication}/></Route>
       <Route exact path="/profile"><Profile  failedAuthentication={failedProfileAuthentication}/></Route>
-      <Route exact path="/accountInfo"><AccountInfo/></Route>
+      <Route exact path="/user/accountInfo"><AccountInfo/></Route>
     </Switch>
     <ToastContainer theme='colored'/>
     </div>

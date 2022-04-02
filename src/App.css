@@ -3,13 +3,6 @@
   height: 100vh;
 }
 
-input.form-control{
-}
-
-input.form-control:focus {
-  background: #f0f0ff;
-}
-
 .error {
   position: relative;
   color: red;

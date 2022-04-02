@@ -1,39 +1,61 @@
 import React from 'react'
 import styles from './AccountInfo.module.css';
 import Header from '../Header/Header';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { TextField } from './TextField';
+import { Bars } from 'react-loader-spinner';
 import * as Yup from "yup";
 const AccountInfo = (props) => {
 
+    const [loader,setLoader] = useState(false);
+
+    useEffect(()=>{
+        setLoader(true);
+        setTimeout(()=>{
+            setLoader(false);
+        },2000);
+    },[])
+
     const validate = Yup.object({
-        name: Yup.string().max(25, 'Must be 15 characters or less')
+        name: Yup.string().max(25, '*Must be 25 characters or less')
             .required('*Required'),
         email: Yup.string()
-            .email('Email is invalid')
+            .email('*Email is invalid')
             .required('*Required'),
         dob:Yup.date().required("*Required"),
         city:Yup.string()
-                .max(25,"city name should be less than 25 chars")
+                .max(25,"*City name should be less than 25 chars")
                 .required("*Required"),
         country: Yup.string()
-                    .max(25,"country name should be less that 25 characters")
+                    .max(25,"*Country name should be less that 25 characters")
                     .required("*Required"),
         college:Yup.string().required("*Required"),
-        description:Yup.string().max(100,"Description should not exceed 100 words")
+        description:Yup.string()
+                    .max(100,"*Description should not exceed 100 words")
+                    .required("*Required")
     });
 
     const handleOnSubmit = async(values) =>{
+        setLoader(true);
         setTimeout(()=>{
             console.log(JSON.stringify(values));
-            alert("form submitted successfully");
+            setLoader(false);
+            alert("Form Submitted");
         },3000);
-    }
-
+        }
   return (
-    <>
+        <>        
         <Header dark/>
+        <div style={{margin:'0 auto',width: '40%'}}>
+                {loader && 
+                    <div style={{margin: '0 auto', width:'60px',paddingTop:'20px'}}>
+                        <h2 style={{textAlign:"center"}}>Please Wait..</h2>
+                        <Bars color="#00BFFF" height={60} width={60}/>
+                    </div>
+                }
+        </div>
+        {!loader &&
         <div className={styles.mainContainer}>
             <div className={styles.leftPanel}>
                 <div className={styles.userImage}>
@@ -52,7 +74,7 @@ const AccountInfo = (props) => {
                         city:'',
                         country:'',
                         college:'',
-                        description:''
+                        description:"Hey there I am using Nexus!"
                     }}
                     validationSchema={validate}
                     onSubmit={
@@ -89,8 +111,8 @@ const AccountInfo = (props) => {
                 </Formik>
                 </div>
             </div>
-        </div>
-    </>
+        </div>}
+        </>
   )
 }
 
