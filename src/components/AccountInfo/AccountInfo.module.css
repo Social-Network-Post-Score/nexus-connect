@@ -1,0 +1,117 @@
+div{
+    box-sizing: border-box;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin:24px auto;
+    width: 800px;
+
+}
+
+.rightPanel{
+    width: 700px;
+}
+
+.rightPanel h2{
+    color: #1f72ad;
+}
+
+.leftPanel{
+    margin-right: 32px;
+    padding-top: 50px;
+}
+
+.formContainer{
+    height: 600px;
+    overflow: auto;
+}
+
+
+.formField{
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.userImage{
+    width: 150px;
+    height: 150px;
+}
+
+.userImage p{
+    color: #3c99dc;
+    text-align: center;
+}
+
+.leftPanel img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid white;
+    background-color: rgba(128, 128, 128, 0.8);
+}
+
+.rightPanel form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 2px solid #3c99dc;
+    padding-top: 16px;
+    padding-right: 16px;
+    /* height: 400px;
+    overflow: auto; */
+}
+
+.formField input{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #3c99dc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.formField textarea{
+    width:100%;
+    height: 200px;
+    border: 1px solid #3c99dc;
+    border-radius:6px;
+    padding: 4px;
+    outline: none;
+}
+
+.formField label{
+    color: #08558d;
+    font-size: 16px;
+    padding: 4px;
+}
+
+
+.formField input:focus-visible{
+    border: 2px solid #3c99dc;
+}
+
+.formField textarea:focus-visible{
+    border: 2px solid #3c99dc;
+
+}
+
+.rightPanel form button{
+    padding: 4px;
+    width: 100px;
+    height: 40px;
+    border-radius: 6px;
+    margin: 6px;
+    float: right;
+    border: none;
+    background-color: #3c99dc;
+    color: white;
+    font-size: 18px;
+}
+
+.rightPanel form button:hover{
+    cursor: pointer;
+    background-color: #206ea5;
+}

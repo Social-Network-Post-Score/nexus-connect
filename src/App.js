@@ -9,6 +9,7 @@ import SignUp from './components/SignUpPage/Signup';
 import About from './components/About/About';
 import Posts from './components/Posts/Posts';
 import Profile from './components/Profile/Profile';
+import AccountInfo from './components/AccountInfo/AccountInfo';
 
 function App() {
   const success = (type) => type==='l'?toast.success('Login Successful!!'):toast.success('Signup Successful!!')
@@ -29,6 +30,7 @@ function App() {
       <Route exact path="/profile"><Profile/></Route>
       <Route exact path="/posts"><Posts postSuccess={postSuccess} failedAuthentication={failedAuthentication}/></Route>
       <Route exact path="/profile"><Profile  failedAuthentication={failedProfileAuthentication}/></Route>
+      <Route exact path="/accountInfo"><AccountInfo/></Route>
     </Switch>
     <ToastContainer theme='colored'/>
     </div>
