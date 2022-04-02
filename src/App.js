@@ -18,6 +18,7 @@ function App() {
   const failedAuthentication = () => toast.warn('Please login to see posts')
   const commentSuccess = () => toast.success('Comment Posted Successfully')
   const failedProfileAuthentication = () => toast.warn('Please login to see profile')
+  const failedAccountInfoAuthentication = ()=>toast.warn('Plase login to see this page');
 
   return (
     <div className="App">
@@ -30,7 +31,7 @@ function App() {
       <Route exact path="/profile"><Profile/></Route>
       <Route exact path="/posts"><Posts postSuccess={postSuccess} failedAuthentication={failedAuthentication}/></Route>
       <Route exact path="/profile"><Profile  failedAuthentication={failedProfileAuthentication}/></Route>
-      <Route exact path="/user/accountInfo"><AccountInfo/></Route>
+      <Route exact path="/user/accountInfo"><AccountInfo failedAuthentication={failedAccountInfoAuthentication}/></Route>
     </Switch>
     <ToastContainer theme='colored'/>
     </div>

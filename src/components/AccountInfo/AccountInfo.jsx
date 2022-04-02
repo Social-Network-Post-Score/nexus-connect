@@ -6,11 +6,21 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { TextField } from './TextField';
 import { Bars } from 'react-loader-spinner';
 import * as Yup from "yup";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 const AccountInfo = (props) => {
 
     const [loader,setLoader] = useState(false);
+    const history = useHistory();
+
+    const user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(()=>{
+        if(user===null)
+        {
+            props.failedAuthentication();
+            history.replace('/');
+        }
         setLoader(true);
         setTimeout(()=>{
             setLoader(false);
@@ -31,18 +41,28 @@ const AccountInfo = (props) => {
                     .max(25,"*Country name should be less that 25 characters")
                     .required("*Required"),
         college:Yup.string().required("*Required"),
-        description:Yup.string()
+        about:Yup.string()
                     .max(100,"*Description should not exceed 100 words")
                     .required("*Required")
     });
 
-    const handleOnSubmit = async(values) =>{
+    const handleOnSubmit = async(data) =>{
         setLoader(true);
-        setTimeout(()=>{
-            console.log(JSON.stringify(values));
-            setLoader(false);
-            alert("Form Submitted");
-        },3000);
+        const val= {...user,...data};
+        console.log("val",val);
+        await axios.patch(`https://secret-castle-58335.herokuapp.com/api/users/${user._id}`,val)
+                .then((res)=>{
+                    localStorage.setItem('user',JSON.stringify(res.data.user))
+                    setLoader(false);
+                    alert("Updated Successfuly")
+                    history.push('/posts');
+                })
+                .catch((err)=>{
+                    alert("Failed to update user info");
+                    console.log(err);
+                    }
+                )
+        setLoader(false);
         }
   return (
         <>        
@@ -55,11 +75,11 @@ const AccountInfo = (props) => {
                     </div>
                 }
         </div>
-        {!loader &&
+        {!loader && user &&
         <div className={styles.mainContainer}>
             <div className={styles.leftPanel}>
                 <div className={styles.userImage}>
-                    <img src="https://images.performgroup.com/di/library/GOAL/19/ef/lionel-messi-barcelona-2018-19_r1yc5vs8q1z11uy1i9rt9tk8g.jpg?t=271447297"></img>
+                    <img src={`https://robohash.org/${user.name}.png?size=200x200&set=set2`}></img>
                     <p>Profile Picture</p>
                 </div>
             </div>
@@ -68,13 +88,13 @@ const AccountInfo = (props) => {
                 <div className={styles.formContainer}>
                 <Formik
                     initialValues={{
-                        name: '',
-                        email: '',
-                        dob:'',
-                        city:'',
-                        country:'',
-                        college:'',
-                        description:"Hey there I am using Nexus!"
+                        name: user.name ? user.name:"",
+                        email: user.email ? user.email:"",
+                        dob: user.dob ? user.dob:"",
+                        city: user.city ? user.city:"",
+                        country: user.country ? user.country:"",
+                        college: user.college ? user.college:'',
+                        about:user.about? user.about:"Hey there I am using Nexus!"
                     }}
                     validationSchema={validate}
                     onSubmit={
@@ -88,7 +108,7 @@ const AccountInfo = (props) => {
                                 <Form>
                                     <TextField type="text" placeholder="enter your name" name="name" label="Name"></TextField>
 
-                                    <TextField type="text" placeholder="enter your email id" name="email" label="Email"></TextField>
+                                    <TextField type="text" placeholder="enter your email id" name="email" label="Email" readonly="true"></TextField>
 
                                     <TextField type="date" name="dob" label="Date of birth"></TextField>
 
@@ -99,9 +119,9 @@ const AccountInfo = (props) => {
                                     <TextField type="text" name="college" placeholder="enter your College/University/School name" label="College"></TextField>
                                     
                                     <div className={styles.formField}>
-                                        <label htmlFor='description'>Description</label>
-                                        <Field name="description" as="textarea" placeholder="write something about you in 100 words"/>
-                                        <ErrorMessage name="description" component="div" className="error"/>
+                                        <label htmlFor='about'>Description</label>
+                                        <Field name="about" as="textarea" placeholder="write something about you in 100 words"/>
+                                        <ErrorMessage name="about" component="div" className="error"/>
                                     </div>
 
                                     <button type="submit">Submit</button>

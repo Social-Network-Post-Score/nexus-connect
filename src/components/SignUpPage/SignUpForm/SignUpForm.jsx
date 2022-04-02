@@ -77,7 +77,7 @@ function SignUpForm(props) {
                     setDisabled(false)
                     localStorage.setItem('user',JSON.stringify(res.data.user))
                     props.success('s');
-                    history.push('/posts')
+                    history.push('/user/accountInfo')
                 })
                 .catch((err)=>{
                     setDisabled(false)

@@ -27,6 +27,12 @@ div{
 .formContainer{
     height: 600px;
     overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.formContainer::-webkit-scrollbar {
+    display: none;
 }
 
 
