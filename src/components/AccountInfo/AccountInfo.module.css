@@ -33,7 +33,7 @@ div{
 }
 
 .formContainer::-webkit-scrollbar {
-    display: none;
+    display: none; /* chrome, opera */
 }
 
 

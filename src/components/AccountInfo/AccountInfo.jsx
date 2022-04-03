@@ -41,7 +41,7 @@ const AccountInfo = (props) => {
                     .max(25,"*Country name should be less that 25 characters"),
         college:Yup.string().required("*Required"),
         about:Yup.string()
-                    .max(100,"*Description should not exceed 100 words")
+                    .max(200,"*Description should not exceed 100 words")
                     .required("*Required")
     });
 
