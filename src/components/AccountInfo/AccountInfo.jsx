@@ -83,6 +83,7 @@ const AccountInfo = (props) => {
                 </div>
             </div>
             <div className={styles.rightPanel}>
+
                 <h2>Account Details</h2>
                 <div className={styles.formContainer}>
                 <Formik
