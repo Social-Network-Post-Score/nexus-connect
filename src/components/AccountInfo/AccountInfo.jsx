@@ -15,6 +15,7 @@ const AccountInfo = (props) => {
     const history = useHistory();
 
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
 
     useEffect(()=>{
         if(user===null)
