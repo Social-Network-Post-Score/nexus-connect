@@ -3,6 +3,13 @@
   height: 100vh;
 }
 
+.error {
+  position: relative;
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+}
+
 /* .App {
   text-align: center;
   font-family: 'Poppins', sans-serif;
