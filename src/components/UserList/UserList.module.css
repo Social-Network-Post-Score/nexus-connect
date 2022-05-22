@@ -1,0 +1,65 @@
+.mainContainer {
+  position: relative;
+  left: 72%;
+  bottom: 1550px;
+  width: 25%;
+  padding: 4px;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+
+.mainContainer h2 {
+  color: #4bc2ee;
+  text-align: center;
+}
+
+.searchBar {
+  width: 100%;
+  padding: 4px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.searchBar input {
+  width: 80%;
+  margin: 0 auto;
+  padding: 6px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.userContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.userMain:hover {
+  transform: scale(1.02);
+  transition: transform 500ms;
+  transition-timing-function: cubic-bezier(0.1, 0.7, 1, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.userMain {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  padding: 8px 4px;
+}
+
+.userDp {
+}
+
+.userName {
+  margin-left: 16px;
+  color: #1890ff;
+}
+
+.userDp img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}

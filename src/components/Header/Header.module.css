@@ -130,6 +130,7 @@
   margin: 8px;
   padding: 4px;
   border-left: 4px solid #3c99dc;
+  z-index: 2;
 }
 
 .dropDownOptions {
