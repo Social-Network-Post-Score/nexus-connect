@@ -8,8 +8,10 @@ import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function Profile(props) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const { userId } = useParams();
+
+  console.log(user);
 
   const loggedUser = JSON.parse(localStorage.getItem("user"));
   console.log("Logged user", loggedUser);
@@ -130,9 +132,20 @@ export default function Profile(props) {
             <div className={classes.content}>
               <div className={classes.friendsContainer}>
                 <div className={classes.friendsHeading}>
-                  <h2>Friends</h2>
+                  <h2>Following</h2>
+                  <h3>{user.friends.length}</h3>
                 </div>
-                <div className={classes.friends}></div>
+                <div className={classes.friends}>
+                  {user != null &&
+                    user.friends.map((friend) => {
+                      return (
+                        <div className={classes.friend}>
+                          <img src={user.image} />
+                          <p>{friend.name}</p>
+                        </div>
+                      );
+                    })}
+                </div>
               </div>
               <div className={classes.postsContainer}>
                 <div className={classes.postsHeading}>

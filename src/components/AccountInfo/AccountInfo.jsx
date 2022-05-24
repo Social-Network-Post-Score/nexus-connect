@@ -57,7 +57,7 @@ const AccountInfo = (props) => {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         setLoader(false);
         toast.success("Updated Profile successfuly");
-        history.push("/profile");
+        history.push(`/profile/${user._id}`);
       })
       .catch((err) => {
         toast.error("Failed to update user info");
