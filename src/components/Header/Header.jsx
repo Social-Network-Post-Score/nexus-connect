@@ -172,7 +172,9 @@ function Header(props) {
         <div className={styles.dropDownContainer}>
           <div className={styles.dropDownOptions}>
             <FontAwesomeIcon icon={faUser} />
-            <Link to={`/profile/${user._id}`}>Profile</Link>
+            <Link to={`/profile/${user._id}`} replace>
+              Profile
+            </Link>
           </div>
           <div className={styles.dropDownOptions}>
             <FontAwesomeIcon icon={faRightToBracket} />

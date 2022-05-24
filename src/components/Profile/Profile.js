@@ -12,9 +12,11 @@ export default function Profile(props) {
   const { userId } = useParams();
 
   const loggedUser = JSON.parse(localStorage.getItem("user"));
+  console.log("Logged user", loggedUser);
   const friendsList = loggedUser.friends.split(",");
   const [posts, setPosts] = useState([]);
   const history = useHistory();
+  const [disabled, setDisbaled] = useState(false);
 
   const fetchUser = async () => {
     await axios
@@ -30,6 +32,41 @@ export default function Profile(props) {
     const res = await axios.get(fetchPostUrl);
     console.log(res.data.posts);
     setPosts(res.data.posts);
+  };
+
+  const handleOnClickFollow = async () => {
+    setDisbaled(true);
+    loggedUser.friends += `,${user._id}`;
+    console.log("logged user after button press: " + loggedUser);
+    await axios
+      .patch(
+        `https://secret-castle-58335.herokuapp.com/api/users/${loggedUser._id}`,
+        loggedUser
+      )
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleOnClickUnfollow = async () => {
+    setDisbaled(true);
+    console.log(user._id);
+    let friends = friendsList.filter((id) => user._id != id).join();
+    console.log("Friends: ", friends);
+    loggedUser.friends = friends;
+    console.log("logged user after button press: ", loggedUser);
+    await axios
+      .patch(
+        `https://secret-castle-58335.herokuapp.com/api/users/${loggedUser._id}`,
+        loggedUser
+      )
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -67,11 +104,19 @@ export default function Profile(props) {
                   {loggedUser._id === user._id ? (
                     <Link to="/user/accountInfo">Edit Profile</Link>
                   ) : friendsList.includes(user._id) ? (
-                    <button disabled className={classes.followButton}>
-                      Following
+                    <button
+                      className={classes.followButton}
+                      onClick={() => handleOnClickUnfollow()}
+                    >
+                      {disabled ? "unfollowing..." : `unfollow`}
                     </button>
                   ) : (
-                    <button className={classes.followButton}>Follow</button>
+                    <button
+                      onClick={() => handleOnClickFollow()}
+                      className={classes.followButton}
+                    >
+                      {disabled ? "following..." : `+ follow`}
+                    </button>
                   )}
                   <div>
                     <p>{user.college}</p>
