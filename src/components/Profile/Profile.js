@@ -9,13 +9,10 @@ import { useParams } from "react-router-dom";
 
 export default function Profile(props) {
   const [user, setUser] = useState({});
-  const [friendsSet, setFriendsSet] = useState(new Set());
   const { userId } = useParams();
 
   const loggedUser = JSON.parse(localStorage.getItem("user"));
-  console.log(loggedUser);
-  console.log("User: ", user);
-  console.log(friendsSet);
+  const friendsList = loggedUser.friends.split(",");
   const [posts, setPosts] = useState([]);
   const history = useHistory();
 
@@ -24,9 +21,6 @@ export default function Profile(props) {
       .get(`https://secret-castle-58335.herokuapp.com/api/users/${userId}`)
       .then((res) => {
         setUser(res.data.user);
-        let set = new Set();
-        res.data.user.friends.map((friend) => set.add(friend._id));
-        setFriendsSet(set);
       })
       .catch((err) => console.log(err));
   };
@@ -72,10 +66,12 @@ export default function Profile(props) {
                 <div className={classes.editButton}>
                   {loggedUser._id === user._id ? (
                     <Link to="/user/accountInfo">Edit Profile</Link>
-                  ) : friendsSet.has(user._id) ? (
-                    <button>Following</button>
+                  ) : friendsList.includes(user._id) ? (
+                    <button disabled className={classes.followButton}>
+                      Following
+                    </button>
                   ) : (
-                    <button>Follow</button>
+                    <button className={classes.followButton}>Follow</button>
                   )}
                   <div>
                     <p>{user.college}</p>
