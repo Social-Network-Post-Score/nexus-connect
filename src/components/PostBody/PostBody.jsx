@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReadMoreReact from 'read-more-react';
 import styles from './PostBody.module.css'
 import Loading from './loading.gif'
 import CommentBody from '../CommentBody/CommentBody';
+import axios from 'axios';
 
 function PostBody(props) {
     const [upvoteHover, setupvoteHover] = useState(false)
@@ -15,8 +16,9 @@ function PostBody(props) {
     const [err, setErr] = useState(null)
     const [comment,setComment] = useState('')
     const [clicked, setClicked] = useState(false)
+    const [post,setPost] = useState(props.post)
  
-    const {post} = props;
+    // let {post} = props;
 
     const handleClick = () => {
         setClicked(true)
@@ -30,11 +32,40 @@ function PostBody(props) {
             setErr(null)
             props.createComment(comment,post._id)
             .then(()=>{
+                console.log('Created')
                 setClicked(false)
                 setComment('')
-                props.getPostById(post._id)
+                getComment(1)
             })
         }
+    }
+
+    const getComment = async (flag=0) => {
+        console.log('I am flag ',flag);
+        (post.comment===undefined || flag === 1) ? await axios.get(`https://secret-castle-58335.herokuapp.com/api/posts/${post._id}`)
+        .then((res)=>{
+            // post = res.data.post
+            let selectedPost = post;
+            selectedPost["comment"] = res.data.post.comment;
+            setPost(selectedPost)
+            if(flag === 0){
+                console.log('Flag 0 ba')
+                toggleComment()
+            }
+            else{
+                setShowComments(false)
+                setShowComments(true)
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+        :
+        toggleComment()
+    }
+
+    const toggleComment = () => {
+        setShowComments(!showComments)
     }
 
     const handleComment = (e) => {
@@ -90,7 +121,7 @@ function PostBody(props) {
                     <div className={commentHover||showComments===true?styles.commentHover:styles.iconContainer}
                         onMouseEnter={()=>setcommentHover(true)} 
                         onMouseLeave={()=>setcommentHover(false)}
-                        onClick={()=>setShowComments(!showComments)}
+                        onClick={()=>getComment(0)}
                     >
                         <img 
                             src={`https://img.icons8.com/external-sbts2018-outline-sbts2018/24/${commentHover||showComments===true?'1b7931':'6a6a6a'}/external-comment-social-media-basic-1-sbts2018-outline-sbts2018.png`}
@@ -111,20 +142,23 @@ function PostBody(props) {
                     showComments && 
                     <div className={styles.commentBlock}>
                         <textarea row={2} placeholder='Say Something....' className={styles.commentBox}
-                        onChange={(e)=>handleComment(e)}
-                        value={comment}
+                            onChange={(e)=>handleComment(e)}
+                            value={comment}
                         />
                         {
                             err && <p className={styles.error}>{err}</p>
                         }
-                        <div className={styles.sendContainer} onClick={handleClick}>
+                        <div className={styles.sendContainer} onClick={()=>handleClick()}>
                             {clicked===false ? <img className={styles.send} 
                                 src="https://img.icons8.com/external-prettycons-lineal-prettycons/49/000000/external-send-social-media-prettycons-lineal-prettycons.png" 
                                 alt='send'
                             />:<img src={Loading} alt='loading' className={styles.loading}/>}
                         </div>
+                        {/* {
+                            console.log('I am post from return ', post)
+                        } */}
                         {
-                            post.comment.length > 0 ? post.comment.map(comment=><CommentBody comment={comment}/>): <p className={styles.nocomment}>No Comments Yet !</p>
+                            post.comment && post.comment.length > 0 ? post.comment.map(comment=><CommentBody comment={comment}/>): <p className={styles.nocomment}>No Comments Yet !</p>
                         }
                     </div>
                 }

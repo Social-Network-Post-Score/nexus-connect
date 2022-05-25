@@ -72,6 +72,9 @@ function LoginForm(props) {
                 {/* <div className={styles.rem}>
                     <Checkbox className={styles.check} onChange={()=>setsaveUser(!saveUser)}><p>Remember Me</p></Checkbox>
                 </div> */}
+                <div className={styles.rem}>
+                    <Link to={`/forgot-password?email=${email}`}>Forgot Password?</Link>
+                </div>
                 <p className={styles.signup}>New To Nexus? <Link to="/signup">Sign Up</Link> here</p>
             </div>
         </div>

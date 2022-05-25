@@ -10,6 +10,7 @@ import About from "./components/About/About";
 import Posts from "./components/Posts/Posts";
 import Profile from "./components/Profile/Profile";
 import AccountInfo from "./components/AccountInfo/AccountInfo";
+import ForgotPassword from "./components/LoginPage/LoginForm/ForgotPassword";
 
 function App() {
   const success = (type) =>
@@ -61,6 +62,9 @@ function App() {
         </Route>
         <Route exact path="/user/accountInfo">
           <AccountInfo failedAuthentication={failedAccountInfoAuthentication} />
+        </Route>
+        <Route exact path="/forgot-password">
+          <ForgotPassword/>
         </Route>
       </Switch>
       <ToastContainer theme="colored" />

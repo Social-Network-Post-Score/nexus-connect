@@ -47,6 +47,14 @@ function Posts(props) {
       .then((res) => {
         console.log(res.data.post);
         // setLoader(false)
+        let posts = allPosts;
+        for(let i=0;i<posts.length;i++){
+            if(posts[i]._id === res.data.post._id){
+                posts[i] = res.data.post
+            }
+        }
+        console.log('I am posts ',posts);
+        setallPosts(posts)
       })
       .catch((err) => console.log(err));
   };
