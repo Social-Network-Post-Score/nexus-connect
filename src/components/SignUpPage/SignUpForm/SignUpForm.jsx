@@ -70,7 +70,7 @@ function SignUpForm(props) {
                 "email":email,
                 "password":password,
                 "posts":'abc',
-                "profileimage":`https://robohash.org/${text}.png?size=70x70&set=set2`
+                "profileimage":`https://picsum.photos/seed/${email}/70/70`
             }
             await axios.post('https://secret-castle-58335.herokuapp.com/api/users/signup',data)
                 .then((res)=>{

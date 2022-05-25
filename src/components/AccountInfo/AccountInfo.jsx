@@ -81,7 +81,7 @@ const AccountInfo = (props) => {
           <div className={styles.leftPanel}>
             <div className={styles.userImage}>
               <img
-                src={`https://robohash.org/${user.name}.png?size=200x200&set=set2`}
+                src={`https://picsum.photos/seed/${user.email}/200/200`}
               ></img>
               <p>Profile Picture</p>
             </div>

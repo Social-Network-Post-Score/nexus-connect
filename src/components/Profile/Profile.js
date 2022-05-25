@@ -90,7 +90,7 @@ export default function Profile(props) {
             <div className={classes.userInfo}>
               <div className={classes.userImage}>
                 <img
-                  src={`https://robohash.org/${user.name}.png?size=200x200&set=set2`}
+                  src={`https://picsum.photos/seed/${user.email}/200/200`}
                   alt="user dp"
                 ></img>
               </div>

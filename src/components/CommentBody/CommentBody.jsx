@@ -7,7 +7,7 @@ function CommentBody({comment}) {
     time[1] = time[1].substr(0,time[1].length-5)
     time[0] = time[0].split('-')
     time[0] = time[0][2]+'-'+time[0][1]+'-'+time[0][0]
-    // const url = `https://robohash.org/${comment.creatorName}.png?size=70x70&set=set2`
+    // const url = `https://picsum.photos/seed/${user.email}/200/200`
     return ( 
         <div className={styles.container}>
             {/* <div className={styles.imageContainer}>

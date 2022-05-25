@@ -146,7 +146,7 @@ function Header(props) {
                   onClick={() => setDpClicked(!dpClicked)}
                 >
                   <img
-                    src={`https://robohash.org/${user.name}.png?size=50x50&set=set2`}
+                    src={`https://picsum.photos/seed/${user.email}/50/50`}
                     alt="user dp"
                     className={styles.userDp}
                   ></img>
