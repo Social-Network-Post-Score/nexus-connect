@@ -141,7 +141,7 @@ export default function Profile(props) {
                     user.friends.map((friend) => {
                       return (
                         <div className={classes.friend}>
-                          <img src={user.image} />
+                          <img src={friend.image} />
                           <p>{friend.name}</p>
                         </div>
                       );

@@ -177,11 +177,11 @@ function Header(props) {
         <div className={styles.dropDownContainer}>
           <div className={styles.dropDownOptions}>
             <FontAwesomeIcon icon={faUser} />
-            <a onClick={handleProfileClick}>Profile</a>
+              <a onClick={handleProfileClick}>Profile</a>
           </div>
           <div className={styles.dropDownOptions}>
             <FontAwesomeIcon icon={faRightToBracket} />
-            <a onClick={handleSignOut}>Logout</a>
+              <a onClick={handleSignOut}>Logout</a>
           </div>
         </div>
       )}

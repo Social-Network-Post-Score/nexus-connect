@@ -17,8 +17,10 @@ function PostBody(props) {
     const [comment,setComment] = useState('')
     const [clicked, setClicked] = useState(false)
     const [post,setPost] = useState(props.post)
+    const [upvotes, setUpvotes] = useState(props.post.upvotes)
+    const [downvotes, setDownvotes] = useState(props.post.downvotes)
  
-    // let {post} = props;
+    let {user} = props;
 
     const handleClick = () => {
         setClicked(true)
@@ -32,7 +34,6 @@ function PostBody(props) {
             setErr(null)
             props.createComment(comment,post._id)
             .then(()=>{
-                console.log('Created')
                 setClicked(false)
                 setComment('')
                 getComment(1)
@@ -41,7 +42,6 @@ function PostBody(props) {
     }
 
     const getComment = async (flag=0) => {
-        console.log('I am flag ',flag);
         (post.comment===undefined || flag === 1) ? await axios.get(`https://secret-castle-58335.herokuapp.com/api/posts/${post._id}`)
         .then((res)=>{
             // post = res.data.post
@@ -72,6 +72,77 @@ function PostBody(props) {
         setComment(e.target.value)
     }
 
+    const isLiked = () => {
+        return post.likeUsers.includes(`${props.user._id}`)
+    }
+
+    const isDisLiked = () => {
+        return post.dislikeUsers.includes(`${props.user._id}`)
+    }
+
+    const updatePost = async () => {
+        await axios.patch(`https://secret-castle-58335.herokuapp.com/api/posts/${post._id}`,post)
+        .then((res)=>{
+            console.log(res.data)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const userLikedThePost = () => {
+        if(isLiked()){
+            setUpvotes(upvotes-1)
+            setupVoteSelected(false);
+            post.likeUsers = post.likeUsers.replace(user._id,'')
+            return
+        }
+        post.likeUsers += user._id;
+        post.upvotes += 1;
+        setUpvotes(upvotes+1)
+        if(isDisLiked()){
+            if(downvotes>0){
+                setDownvotes(downvotes-1)
+                post.downvotes -= 1
+            }
+            setdownVoteSelected(false);
+            post.dislikeUsers = post.dislikeUsers.replace(user._id,'')
+        }
+        setupVoteSelected(true);
+        updatePost()
+    }
+
+    const userDislikedThePost = () => {
+        if(isDisLiked()){
+            setDownvotes(downvotes-1)
+            setdownVoteSelected(false);
+            post.dislikeUsers = post.dislikeUsers.replace(user._id,'')
+            return
+        }
+        post.dislikeUsers += user._id;
+        post.downvotes += 1
+        setDownvotes(downvotes+1)
+        if(isLiked()){
+            if(upvotes>0){
+                setUpvotes(upvotes-1)
+                post.upvotes -= 1
+            }
+            setupVoteSelected(false);
+            post.likeUsers = post.likeUsers.replace(user._id,'')
+        }
+        setdownVoteSelected(true);
+        updatePost()
+    }
+
+    useEffect(() => {
+      if(isLiked()){
+        setupVoteSelected(true)
+      }
+      if(isDisLiked()){
+        setdownVoteSelected(true)
+      }
+    }, [])
+
     let time = post.createdAt.split('T')
     time[1] = time[1].substr(0,time[1].length-5)
     time[0] = time[0].split('-')
@@ -101,22 +172,40 @@ function PostBody(props) {
                     <div className={upvoteHover?styles.updownHover:styles.iconContainer}
                         onMouseEnter={()=>setupvoteHover(true)} 
                         onMouseLeave={()=>setupvoteHover(false)}
-                        onClick={()=>setupVoteSelected(true)}
+                        onClick={()=>userLikedThePost()}
                     >
-                        <img 
-                            src={upVoteSelected?`https://img.icons8.com/external-those-icons-fill-those-icons/24/288cfb/external-up-arrows-those-icons-fill-those-icons-2.png`:`https://img.icons8.com/external-those-icons-lineal-those-icons/24/${upvoteHover?'288cfb':'6a6a6a'}/external-up-arrows-those-icons-lineal-those-icons-2.png` }
-                            alt="upvote"
-                        />
+                        <div className={styles.likeBtn}>
+                            <div>
+                                <img 
+                                    src={upVoteSelected?`https://img.icons8.com/external-those-icons-fill-those-icons/24/288cfb/external-up-arrows-those-icons-fill-those-icons-2.png`:`https://img.icons8.com/external-those-icons-lineal-those-icons/24/${upvoteHover?'288cfb':'6a6a6a'}/external-up-arrows-those-icons-lineal-those-icons-2.png` }
+                                    alt="upvote"
+                                />
+                            </div>
+                            <div className={styles.countDiv}>
+                                <span className={styles.count}>{
+                                    upvotes
+                                }</span>
+                            </div>
+                        </div>
                     </div>
                     <div className={downvoteHover?styles.updownHover:styles.iconContainer}
                         onMouseEnter={()=>setdownvoteHover(true)}
                         onMouseLeave={()=>setdownvoteHover(false)}
-                        onClick={()=>setdownVoteSelected(true)}
+                        onClick={()=>userDislikedThePost()}
                     >
-                        <img  
-                            src={downVoteSelected?`https://img.icons8.com/external-kmg-design-glyph-kmg-design/32/288cfb/external-down-arrows-kmg-design-glyph-kmg-design-1.png`:`https://img.icons8.com/external-those-icons-lineal-those-icons/24/${downvoteHover?'288cfb':'6a6a6a'}/external-down-arrows-those-icons-lineal-those-icons-2.png`}
-                            alt="downvote"
-                        />
+                        <div className={styles.dislikeBtn}>
+                            <div>
+                                <img  
+                                    src={downVoteSelected?`https://img.icons8.com/external-kmg-design-glyph-kmg-design/32/288cfb/external-down-arrows-kmg-design-glyph-kmg-design-1.png`:`https://img.icons8.com/external-those-icons-lineal-those-icons/24/${downvoteHover?'288cfb':'6a6a6a'}/external-down-arrows-those-icons-lineal-those-icons-2.png`}
+                                    alt="downvote"
+                                />
+                            </div>
+                            <div className={styles.countDiv}>
+                                <span className={styles.count}>{
+                                    downvotes
+                                }</span>
+                            </div>
+                        </div>
                     </div>
                     <div className={commentHover||showComments===true?styles.commentHover:styles.iconContainer}
                         onMouseEnter={()=>setcommentHover(true)} 

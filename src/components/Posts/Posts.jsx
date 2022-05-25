@@ -109,6 +109,7 @@ function Posts(props) {
             key={post._id}
             createComment={createComment}
             getPostById={getPostById}
+            user = {userData}
           />
         ))}
       </div>

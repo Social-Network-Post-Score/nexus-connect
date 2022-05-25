@@ -130,3 +130,17 @@
     color: rgba(0,0,0,0.6);
     font-weight: 600;
 }
+
+.likeBtn, .dislikeBtn{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.countDiv{
+    margin-top: 5px;
+}
+
+.count{
+    padding: 15px 0;
+}
