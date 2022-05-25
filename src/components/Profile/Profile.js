@@ -8,25 +8,23 @@ import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function Profile(props) {
-  const [user, setUser] = useState({});
-  const [friendsSet, setFriendsSet] = useState(new Set());
+  const [user, setUser] = useState(null);
   const { userId } = useParams();
 
+  console.log(user);
+
   const loggedUser = JSON.parse(localStorage.getItem("user"));
-  console.log(loggedUser);
-  console.log("User: ", user);
-  console.log(friendsSet);
+  console.log("Logged user", loggedUser);
+  const friendsList = loggedUser.friends.split(",");
   const [posts, setPosts] = useState([]);
   const history = useHistory();
+  const [disabled, setDisbaled] = useState(false);
 
   const fetchUser = async () => {
     await axios
       .get(`https://secret-castle-58335.herokuapp.com/api/users/${userId}`)
       .then((res) => {
         setUser(res.data.user);
-        let set = new Set();
-        res.data.user.friends.map((friend) => set.add(friend._id));
-        setFriendsSet(set);
       })
       .catch((err) => console.log(err));
   };
@@ -36,6 +34,41 @@ export default function Profile(props) {
     const res = await axios.get(fetchPostUrl);
     console.log(res.data.posts);
     setPosts(res.data.posts);
+  };
+
+  const handleOnClickFollow = async () => {
+    setDisbaled(true);
+    loggedUser.friends += `,${user._id}`;
+    console.log("logged user after button press: " + loggedUser);
+    await axios
+      .patch(
+        `https://secret-castle-58335.herokuapp.com/api/users/${loggedUser._id}`,
+        loggedUser
+      )
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleOnClickUnfollow = async () => {
+    setDisbaled(true);
+    console.log(user._id);
+    let friends = friendsList.filter((id) => user._id != id).join();
+    console.log("Friends: ", friends);
+    loggedUser.friends = friends;
+    console.log("logged user after button press: ", loggedUser);
+    await axios
+      .patch(
+        `https://secret-castle-58335.herokuapp.com/api/users/${loggedUser._id}`,
+        loggedUser
+      )
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -72,10 +105,20 @@ export default function Profile(props) {
                 <div className={classes.editButton}>
                   {loggedUser._id === user._id ? (
                     <Link to="/user/accountInfo">Edit Profile</Link>
-                  ) : friendsSet.has(user._id) ? (
-                    <button>Following</button>
+                  ) : friendsList.includes(user._id) ? (
+                    <button
+                      className={classes.followButton}
+                      onClick={() => handleOnClickUnfollow()}
+                    >
+                      {disabled ? "unfollowing..." : `unfollow`}
+                    </button>
                   ) : (
-                    <button>Follow</button>
+                    <button
+                      onClick={() => handleOnClickFollow()}
+                      className={classes.followButton}
+                    >
+                      {disabled ? "following..." : `+ follow`}
+                    </button>
                   )}
                   <div>
                     <p>{user.college}</p>
@@ -89,9 +132,20 @@ export default function Profile(props) {
             <div className={classes.content}>
               <div className={classes.friendsContainer}>
                 <div className={classes.friendsHeading}>
-                  <h2>Friends</h2>
+                  <h2>Following</h2>
+                  <h3>{user.friends.length}</h3>
                 </div>
-                <div className={classes.friends}></div>
+                <div className={classes.friends}>
+                  {user != null &&
+                    user.friends.map((friend) => {
+                      return (
+                        <div className={classes.friend}>
+                          <img src={user.image} />
+                          <p>{friend.name}</p>
+                        </div>
+                      );
+                    })}
+                </div>
               </div>
               <div className={classes.postsContainer}>
                 <div className={classes.postsHeading}>

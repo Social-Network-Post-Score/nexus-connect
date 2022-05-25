@@ -33,7 +33,9 @@ function Posts(props) {
   const getPosts = async () => {
     setLoader(true);
     await axios
-      .get("https://secret-castle-58335.herokuapp.com/api/posts")
+      .get(
+        `https://secret-castle-58335.herokuapp.com/api/posts/${userData._id}`
+      )
       .then((res) => {
         setallPosts(res.data.data.reverse());
         setLoader(false);
