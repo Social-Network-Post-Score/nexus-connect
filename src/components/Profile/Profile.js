@@ -72,6 +72,10 @@ export default function Profile(props) {
       .catch((err) => console.log(err));
   };
 
+  const handleOnClickFriend = (id) => {
+    window.location.replace(`/profile/${id}`);
+  };
+
   useEffect(() => {
     if (loggedUser === null) {
       props.failedAuthentication();
@@ -140,7 +144,10 @@ export default function Profile(props) {
                   {user != null &&
                     user.friends.map((friend) => {
                       return (
-                        <div className={classes.friend}>
+                        <div
+                          className={classes.friend}
+                          onClick={() => handleOnClickFriend(friend._id)}
+                        >
                           <img src={user.image} />
                           <p>{friend.name}</p>
                         </div>
