@@ -72,6 +72,10 @@ export default function Profile(props) {
       .catch((err) => console.log(err));
   };
 
+  const handleOnClickFriend = (id) => {
+    window.location.replace(`/profile/${id}`);
+  };
+
   useEffect(() => {
     if (loggedUser === null) {
       props.failedAuthentication();
