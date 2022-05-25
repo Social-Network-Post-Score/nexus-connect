@@ -16,6 +16,7 @@ export default function Profile(props) {
   const loggedUser = JSON.parse(localStorage.getItem("user"));
   console.log("Logged user", loggedUser);
   const friendsList = loggedUser.friends.split(",");
+  console.log("Friends List: ", friendsList);
   const [posts, setPosts] = useState([]);
   const history = useHistory();
   const [disabled, setDisbaled] = useState(false);
@@ -38,7 +39,7 @@ export default function Profile(props) {
 
   const handleOnClickFollow = async () => {
     setDisbaled(true);
-    loggedUser.friends += `,${user._id}`;
+    loggedUser.friends += `${user._id},`;
     console.log("logged user after button press: " + loggedUser);
     await axios
       .patch(
