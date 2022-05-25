@@ -42,14 +42,13 @@ function PostBody(props) {
     }
 
     const getComment = async (flag=0) => {
-        (post.comment===undefined || flag === 1) ? await axios.get(`https://secret-castle-58335.herokuapp.com/api/posts/${post._id}`)
+        (post.comment===undefined || flag === 1) ? await axios.get(`https://secret-castle-58335.herokuapp.com/api/posts/post/${post._id}`)
         .then((res)=>{
             // post = res.data.post
             let selectedPost = post;
             selectedPost["comment"] = res.data.post.comment;
             setPost(selectedPost)
             if(flag === 0){
-                console.log('Flag 0 ba')
                 toggleComment()
             }
             else{
