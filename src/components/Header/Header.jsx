@@ -30,6 +30,11 @@ function Header(props) {
     localStorage.removeItem("user");
     history.replace("/");
   };
+
+  const handleProfileClick = () => {
+    //this can be made better I found no other way to redirect to profile page from another profile page
+    window.location.replace(`/profile/${user._id}`);
+  };
   return (
     <div>
       {props.dark && (
@@ -172,9 +177,7 @@ function Header(props) {
         <div className={styles.dropDownContainer}>
           <div className={styles.dropDownOptions}>
             <FontAwesomeIcon icon={faUser} />
-            <Link to={`/profile/${user._id}`} replace>
-              Profile
-            </Link>
+            <a onClick={handleProfileClick}>Profile</a>
           </div>
           <div className={styles.dropDownOptions}>
             <FontAwesomeIcon icon={faRightToBracket} />
