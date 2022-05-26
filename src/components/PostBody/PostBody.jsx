@@ -144,6 +144,10 @@ function PostBody(props) {
     if (isDisLiked()) {
       setdownVoteSelected(true);
     }
+    if (props.creator) {
+      props.post["creatorEmail"] = props.creator.email;
+      setPost(props.post);
+    }
   }, []);
 
   let time = post.createdAt.split("T");

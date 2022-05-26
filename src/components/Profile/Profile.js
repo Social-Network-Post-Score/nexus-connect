@@ -35,7 +35,6 @@ export default function Profile(props) {
   const fetchPosts = async () => {
     const fetchPostUrl = `https://secret-castle-58335.herokuapp.com/api/posts/user/${userId}`;
     const res = await axios.get(fetchPostUrl);
-    console.log(res.data.posts);
     setPosts(res.data.posts.reverse());
   };
 
@@ -179,6 +178,7 @@ export default function Profile(props) {
                   {posts.map((post) => (
                     <PostBody
                       post={post}
+                      creator={user}
                       key={post._id}
                       style={{ width: "100%", marginBottom: "16px" }}
                     />
