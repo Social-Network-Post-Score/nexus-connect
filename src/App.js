@@ -24,7 +24,7 @@ function App() {
   const failedProfileAuthentication = () =>
     toast.warn("Please login to see profile");
   const failedAccountInfoAuthentication = () =>
-    toast.warn("Plase login to see this page");
+    toast.warn("Please login to see this page");
 
   return (
     <div className="App">

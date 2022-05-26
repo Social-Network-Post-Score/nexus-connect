@@ -29,6 +29,7 @@ function ForgotPassword(props) {
         if(isEmail(email)){
             await axios.post('http://secret-castle-58335.herokuapp.com/api/users/reset')
             .then(res => {
+                console.log(res.data)
                 setDivControl({
                     ...divControl,
                     showEmailDiv: false,
@@ -37,7 +38,7 @@ function ForgotPassword(props) {
                 console.log(res.data.pass)
                 setOtp(res.data.pass)
             })
-            .catch(err=>console.log(err))
+            .catch(err=>setErr(err.response.data.message))
         }
         else{
             setErr('Please enter a valid email')
