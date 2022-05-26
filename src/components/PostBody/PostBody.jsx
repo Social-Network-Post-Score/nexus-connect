@@ -155,7 +155,10 @@ function PostBody(props) {
     <div style={props.style} className={styles.container}>
       <div className={styles.imageContainer}>
         <div className={styles.image}>
-          <img src={post.creatorImage} alt="random" />
+          <img
+            src={`https://picsum.photos/seed/${post.creatorEmail}/200/200`}
+            alt="random"
+          />
         </div>
       </div>
       <div className={styles.postContainer}>
