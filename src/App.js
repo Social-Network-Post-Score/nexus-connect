@@ -24,7 +24,13 @@ function App() {
   const failedProfileAuthentication = () =>
     toast.warn("Please login to see profile");
   const failedAccountInfoAuthentication = () =>
-    toast.warn("Plase login to see this page");
+    toast.warn("Please login to see this page");
+  
+  const passwordChangeSuccess = () => 
+    toast.success('Password Changed Successfully!')
+  
+  const passwordChangeFail = () => 
+    toast.success('Some error occured! Please try later!')
 
   return (
     <div className="App">
@@ -36,7 +42,7 @@ function App() {
           <SignUp success={success} fail={fail} />
         </Route>
         <Route exact path="/login">
-          <Login success={success} fail={fail} />
+          <Login success={success} fail={fail}/>
         </Route>
         <Route exact path="/about">
           <About />
@@ -64,7 +70,7 @@ function App() {
           <AccountInfo failedAuthentication={failedAccountInfoAuthentication} />
         </Route>
         <Route exact path="/forgot-password">
-          <ForgotPassword/>
+          <ForgotPassword passwordChangeSuccess={passwordChangeSuccess} passwordChangeFail={passwordChangeFail}/>
         </Route>
       </Switch>
       <ToastContainer theme="colored" />

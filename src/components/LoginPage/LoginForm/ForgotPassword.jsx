@@ -6,12 +6,15 @@ import isEmail from 'validator/lib/isEmail';
 import axios from 'axios';
 import styles from './LoginForm.module.css';
 import OtpInput from 'react-otp-input';
+import { useHistory } from "react-router-dom";
 
 function ForgotPassword(props) {
+    const history = useHistory();
     const [email, setEmail] = useState(window.location.href.split('?')[1].slice(6).trim())
     const [err, setErr] = useState(null)
     const [otp, setOtp] = useState(null)
     const [providedOtp, setProvidedOtp] = useState(null)
+    const [id, setId] = useState(null)
     const [divControl , setDivControl] = useState({
         showEmailDiv : true,
         showOtpDiv: false,
@@ -26,18 +29,23 @@ function ForgotPassword(props) {
 
     const handleSubmit = async () => {
         setErr(null)
+        const data = {
+            "email" : email
+        }
         if(isEmail(email)){
-            await axios.post('http://secret-castle-58335.herokuapp.com/api/users/reset')
+            await axios.post('https://secret-castle-58335.herokuapp.com/api/users/reset',data)
             .then(res => {
+                console.log(res.data)
                 setDivControl({
                     ...divControl,
                     showEmailDiv: false,
                     showOtpDiv: true
                 })
                 console.log(res.data.pass)
+                setId(res.data.id)
                 setOtp(res.data.pass)
             })
-            .catch(err=>console.log(err))
+            .catch(err=>setErr(err.response.data.message))
         }
         else{
             setErr('Please enter a valid email')
@@ -68,10 +76,20 @@ function ForgotPassword(props) {
         }
     }
 
-    const handlePasswordCheck = () => {
+    const handlePasswordCheck = async () => {
         setErr(null)
+        const data = {
+            "password" : password.cnfPwd
+        }
         if(password.cnfPwd === password.newPwd){
-
+            await axios.patch(`https://secret-castle-58335.herokuapp.com/api/users/${id}`,data)
+            .then(()=>{
+                props.passwordChangeSuccess()
+                history.replace("/");
+            })
+            .catch(()=>{
+                props.passwordChangeFail()
+            })
         }
         else{
             setErr("Password doesn't match !")
