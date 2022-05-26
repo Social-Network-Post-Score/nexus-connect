@@ -6,8 +6,10 @@ import isEmail from 'validator/lib/isEmail';
 import axios from 'axios';
 import styles from './LoginForm.module.css';
 import OtpInput from 'react-otp-input';
+import { useHistory } from "react-router-dom";
 
 function ForgotPassword(props) {
+    const history = useHistory();
     const [email, setEmail] = useState(window.location.href.split('?')[1].slice(6).trim())
     const [err, setErr] = useState(null)
     const [otp, setOtp] = useState(null)
@@ -83,6 +85,7 @@ function ForgotPassword(props) {
             await axios.patch(`https://secret-castle-58335.herokuapp.com/api/users/${id}`,data)
             .then(()=>{
                 props.passwordChangeSuccess()
+                history.replace("/");
             })
             .catch(()=>{
                 props.passwordChangeFail()
