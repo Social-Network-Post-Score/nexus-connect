@@ -58,7 +58,7 @@ export default function UserLis(props) {
             >
               <div className={styles.userDp}>
                 <img
-                  src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6t6cRtSwE09hrc6PLaCheHvEIxZYXKxbbWg&usqp=CAU`}
+                  src={`https://picsum.photos/seed/${user.email}/200/200`}
                   alt="user dp"
                 ></img>
               </div>

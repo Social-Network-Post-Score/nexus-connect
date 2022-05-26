@@ -46,6 +46,7 @@ const AccountInfo = (props) => {
 
   const handleOnSubmit = async (data) => {
     setLoader(true);
+    user.userImage = `https://picsum.photos/seed/${data.email}/200/200`;
     const val = { ...user, ...data };
     console.log("val", val);
     await axios
