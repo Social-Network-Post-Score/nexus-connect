@@ -36,7 +36,7 @@ export default function Profile(props) {
     const fetchPostUrl = `https://secret-castle-58335.herokuapp.com/api/posts/user/${userId}`;
     const res = await axios.get(fetchPostUrl);
     console.log(res.data.posts);
-    setPosts(res.data.posts);
+    setPosts(res.data.posts.reverse());
   };
 
   const handleOnClickFollow = async () => {
