@@ -20,7 +20,9 @@ function PostBody(props) {
     const [upvotes, setUpvotes] = useState(props.post.upvotes)
     const [downvotes, setDownvotes] = useState(props.post.downvotes)
  
-    let {user} = props;
+    // let {user} = props;
+
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const handleClick = () => {
         setClicked(true)
@@ -72,11 +74,11 @@ function PostBody(props) {
     }
 
     const isLiked = () => {
-        return post.likeUsers.includes(`${props.user._id}`)
+        return post.likeUsers.includes(`${user._id}`)
     }
 
     const isDisLiked = () => {
-        return post.dislikeUsers.includes(`${props.user._id}`)
+        return post.dislikeUsers.includes(`${user._id}`)
     }
 
     const updatePost = async () => {
@@ -246,7 +248,7 @@ function PostBody(props) {
                             console.log('I am post from return ', post)
                         } */}
                         {
-                            post.comment && post.comment.length > 0 ? post.comment.map(comment=><CommentBody comment={comment}/>): <p className={styles.nocomment}>No Comments Yet !</p>
+                            post.comment && post.comment.length > 0 ? post.comment.map(comment=><CommentBody comment={comment} key={post._id}/>): <p className={styles.nocomment}>No Comments Yet !</p>
                         }
                     </div>
                 }
