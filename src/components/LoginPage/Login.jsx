@@ -8,7 +8,10 @@ function Login(props) {
         <div>
             <div className={styles.container}>
                 <div className={styles.formContainer}>
-                    <LoginForm success={props.success} fail={props.fail}/>
+                    <LoginForm 
+                        success={props.success} 
+                        fail={props.fail}
+                    />
                 </div>
                 <div className={styles.imgContainer}>
                     <img src={LandingImage} alt="landing"/>
