@@ -97,10 +97,10 @@ function ForgotPassword(props) {
     }
 
     return ( 
-        <div>
-            <div>
+        <div className={styles.outerPwdContainer}>
+            <div className={styles.forgotPwdContainer}>
+                <h1>Forgot Password</h1>
                 {divControl.showEmailDiv && <div className='email'>
-                    <h1>Forgot Password</h1>
                     <p>Don't worry! Enter your registered valid email here. You will get an OTP on that mail.</p>
                     {
                         err && <p className={styles.error}>{err}</p>
@@ -112,6 +112,7 @@ function ForgotPassword(props) {
                         value = {email!==''?email:null}
                         placeholder = 'Enter a valid email'
                         onChange = {handleEmailChange}
+                        className = {styles.input}
                     />
                     <Button 
                         type="primary" 
@@ -125,7 +126,7 @@ function ForgotPassword(props) {
                 </div>}
                 {divControl.showOtpDiv && 
                 <div className='otp'>
-                    <p>{`OTP mailed at ${email}.`}</p>
+                    <p className={styles.otpConf}>OTP mailed at <span className={styles.emailId}><i>{`${email}`}</i></span>.</p>
                     {
                         err && <p className={styles.error}>{err}</p>
                     }
@@ -134,12 +135,18 @@ function ForgotPassword(props) {
                         onChange = {handleProvidedOtp}
                         numInputs = {4}
                         separator = {<span>-</span>}
+                        containerStyle = {{
+                            marginBottom: '15px',
+                            width: '220px',
+                            textAlign: 'center'
+                        }}
                         inputStyle = {{
-                            width: '30px',
+                            width: '40px',
                             padding: '5px',
                             outline: 'none',
                             border: '1px solid black',
-                            borderRadius: '4px'
+                            borderRadius: '4px',
+                            margin: '0 5px'
                         }}
                     />
                     <Button 
@@ -154,7 +161,7 @@ function ForgotPassword(props) {
                 </div>}
                 {divControl.showReEnterPasswordDiv && 
                     <div className='password'>
-                        <p>Enter New Password</p>
+                        <p className={styles.pwdText}>Enter New Password</p>
                         <Input 
                             type="password" 
                             name="new-password" 
@@ -164,6 +171,7 @@ function ForgotPassword(props) {
                                 ...password,
                                 newPwd: e.target.value
                             })}
+                            className={styles.input}
                         />
                         <Input 
                             type="password" 
@@ -174,6 +182,7 @@ function ForgotPassword(props) {
                                 ...password,
                                 cnfPwd: e.target.value
                             })}
+                            className={styles.input}
                         />
                         <Button 
                             type="primary" 
