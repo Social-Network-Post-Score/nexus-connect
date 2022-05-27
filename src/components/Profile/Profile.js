@@ -3,12 +3,14 @@ import classes from "./Profile.module.css";
 import axios from "axios";
 import Header from "../Header/Header";
 import PostBody from "../PostBody/PostBody";
+import { Bars } from "react-loader-spinner";
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function Profile(props) {
   const [user, setUser] = useState(null);
+  const [loader, setLoader] = useState(false);
   const { userId } = useParams();
 
   console.log(user);
@@ -33,8 +35,7 @@ export default function Profile(props) {
   const fetchPosts = async () => {
     const fetchPostUrl = `https://secret-castle-58335.herokuapp.com/api/posts/user/${userId}`;
     const res = await axios.get(fetchPostUrl);
-    console.log(res.data.posts);
-    setPosts(res.data.posts);
+    setPosts(res.data.posts.reverse());
   };
 
   const handleOnClickFollow = async () => {
@@ -73,23 +74,35 @@ export default function Profile(props) {
   };
 
   const handleOnClickFriend = (id) => {
+    console.log(id);
     window.location.replace(`/profile/${id}`);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (loggedUser === null) {
       props.failedAuthentication();
       history.replace("/");
     } else {
+      setLoader(true);
       fetchUser();
       fetchPosts();
+      setTimeout(() => {
+        setLoader(false);
+      }, 2000);
     }
   }, []);
 
   return (
     <>
       <Header light />
-      {user && (
+      <div style={{ margin: "0 auto", width: "40%" }}>
+        {loader && (
+          <div style={{ margin: "0 auto", width: "60px", paddingTop: "20px" }}>
+            <Bars color="#00BFFF" height={60} width={60} />
+          </div>
+        )}
+      </div>
+      {user && !loader && (
         <>
           <div className={classes.mainContainer}>
             <div className={classes.userInfo}>
@@ -144,8 +157,13 @@ export default function Profile(props) {
                   {user != null &&
                     user.friends.map((friend) => {
                       return (
-                        <div className={classes.friend}>
-                          <img src={friend.image} />
+                        <div
+                          className={classes.friend}
+                          onClick={() => handleOnClickFriend(friend._id)}
+                        >
+                          <img
+                            src={`https://picsum.photos/seed/${friend.email}/200/200`}
+                          />
                           <p>{friend.name}</p>
                         </div>
                       );
@@ -160,6 +178,7 @@ export default function Profile(props) {
                   {posts.map((post) => (
                     <PostBody
                       post={post}
+                      creator={user}
                       key={post._id}
                       style={{ width: "100%", marginBottom: "16px" }}
                     />
