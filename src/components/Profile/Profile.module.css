@@ -82,6 +82,11 @@ div {
   margin-right: 8px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+}
+
+.friendsContainer::-webkit-scrollbar {
+  display: none; /* chrome, opera */
 }
 
 .friendsHeading {
