@@ -78,7 +78,7 @@ export default function Profile(props) {
     window.location.replace(`/profile/${id}`);
   };
 
-  useEffect(async () => {
+  useEffect(()=> async () => {
     if (loggedUser === null) {
       props.failedAuthentication();
       history.replace("/");

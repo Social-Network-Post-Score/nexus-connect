@@ -4,6 +4,7 @@ import styles from "./PostBody.module.css";
 import Loading from "./loading.gif";
 import CommentBody from "../CommentBody/CommentBody";
 import axios from "axios";
+import { useHistory } from 'react-router-dom'
 
 function PostBody(props) {
   const [upvoteHover, setupvoteHover] = useState(false);
@@ -21,6 +22,7 @@ function PostBody(props) {
   const [downvotes, setDownvotes] = useState(props.post.downvotes);
 
   // let {user} = props;
+  const history = useHistory();
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -137,6 +139,12 @@ function PostBody(props) {
     updatePost();
   };
 
+  const handleDpClick = () => {
+    console.log(history)
+    history.replace('')
+    history.push(`/profile/${post.creator}`)
+  }
+
   useEffect(() => {
     if (isLiked()) {
       setupVoteSelected(true);
@@ -154,7 +162,7 @@ function PostBody(props) {
   time[1] = time[1].substr(0, time[1].length - 5);
   time[0] = time[0].split("-");
   time[0] = time[0][2] + "-" + time[0][1] + "-" + time[0][0];
-  console.log("Post", post);
+
   return (
     <div style={props.style} className={styles.container}>
       <div className={styles.imageContainer}>
@@ -162,6 +170,7 @@ function PostBody(props) {
           <img
             src={`https://picsum.photos/seed/${post.creatorEmail}/200/200`}
             alt="random"
+            onClick={handleDpClick}
           />
         </div>
       </div>

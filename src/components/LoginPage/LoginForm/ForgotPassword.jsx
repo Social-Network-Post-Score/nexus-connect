@@ -35,7 +35,6 @@ function ForgotPassword(props) {
         if(isEmail(email)){
             await axios.post('https://secret-castle-58335.herokuapp.com/api/users/reset',data)
             .then(res => {
-                console.log(res.data)
                 setDivControl({
                     ...divControl,
                     showEmailDiv: false,
@@ -112,7 +111,9 @@ function ForgotPassword(props) {
                         value = {email!==''?email:null}
                         placeholder = 'Enter a valid email'
                         onChange = {handleEmailChange}
-                        className = {styles.input}
+                        style={{
+                            marginBottom: '15px'
+                        }}
                     />
                     <Button 
                         type="primary" 
@@ -138,7 +139,8 @@ function ForgotPassword(props) {
                         containerStyle = {{
                             marginBottom: '15px',
                             width: '220px',
-                            textAlign: 'center'
+                            marginLeft: 'auto',
+                            marginRight: 'auto'
                         }}
                         inputStyle = {{
                             width: '40px',
@@ -171,7 +173,9 @@ function ForgotPassword(props) {
                                 ...password,
                                 newPwd: e.target.value
                             })}
-                            className={styles.input}
+                            style={{
+                                marginBottom: '15px'
+                            }}
                         />
                         <Input 
                             type="password" 
@@ -182,7 +186,9 @@ function ForgotPassword(props) {
                                 ...password,
                                 cnfPwd: e.target.value
                             })}
-                            className={styles.input}
+                            style={{
+                                marginBottom: '15px'
+                            }}
                         />
                         <Button 
                             type="primary" 
