@@ -116,7 +116,7 @@ export default function Profile(props) {
                 <div style={{ width: "60%" }}>
                   <h1>{user.name}</h1>
                   <p style={{ marginBottom: "8px" }}>{user.email}</p>
-                  <p>{`Birthday: ${user.dob}`}</p>
+                  <p>Birthday: {user.dob ? user.dob : "Not mentioned"}</p>
                   <br />
                   <p>{user.about}</p>
                 </div>
