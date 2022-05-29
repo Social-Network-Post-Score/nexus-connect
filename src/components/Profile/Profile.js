@@ -57,7 +57,7 @@ export default function Profile(props) {
   const handleOnClickUnfollow = async () => {
     setDisbaled(true);
     console.log(user._id);
-    let friends = friendsList.filter((id) => user._id != id).join();
+    let friends = friendsList.filter((id) => user._id !== id).join();
     console.log("Friends: ", friends);
     loggedUser.friends = friends;
     console.log("logged user after button press: ", loggedUser);
@@ -78,7 +78,7 @@ export default function Profile(props) {
     window.location.replace(`/profile/${id}`);
   };
 
-  useEffect(()=> async () => {
+  useEffect(() => {
     if (loggedUser === null) {
       props.failedAuthentication();
       history.replace("/");
