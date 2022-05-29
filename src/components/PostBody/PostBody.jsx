@@ -140,7 +140,6 @@ function PostBody(props) {
   };
 
   const handleDpClick = () => {
-    console.log(history)
     history.replace('')
     history.push(`/profile/${post.creator}`)
   }
