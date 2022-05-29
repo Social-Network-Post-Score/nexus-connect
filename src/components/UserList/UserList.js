@@ -11,7 +11,7 @@ export default function UserLis(props) {
   const history = useHistory();
 
   const handleOnChange = (event) => {
-    let word = event.target.value;
+    let word = event.target.value.toLowerCase();
     let list = userList.filter((user) =>
       user.name.toLowerCase().startsWith(word)
     );
