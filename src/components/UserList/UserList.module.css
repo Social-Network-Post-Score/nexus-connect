@@ -3,10 +3,17 @@
   left: 72%;
   bottom: 20%;
   width: 25%;
-  min-height: 65%;
+  height: 65%;
   padding: 4px;
   border: 1px solid gray;
   border-radius: 4px;
+  overflow: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.mainContainer::-webkit-scrollbar {
+  display: none; /* chrome, opera */
 }
 
 .mainContainer h2 {
