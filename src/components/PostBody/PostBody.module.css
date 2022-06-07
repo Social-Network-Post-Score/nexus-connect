@@ -133,7 +133,7 @@
 
 .likeBtn, .dislikeBtn{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
 }
 
@@ -143,4 +143,6 @@
 
 .count{
     padding: 15px 0;
+    position: relative;
+    top: -3px;
 }

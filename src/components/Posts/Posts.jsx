@@ -70,7 +70,7 @@ function Posts(props) {
     };
     console.log(data);
     await axios
-      .post("http://secret-castle-58335.herokuapp.com/api/comments", data)
+      .post("https://secret-castle-58335.herokuapp.com/api/comments", data)
       .then(() => props.commentSuccess())
       .catch((err) => console.log(err));
   };

@@ -259,7 +259,7 @@ function PostBody(props) {
               alt="comment"
             />
           </div>
-          <div
+          {/* <div
             className={
               reshareHover ? styles.reshareHover : styles.iconContainer
             }
@@ -272,7 +272,7 @@ function PostBody(props) {
               }/forward-arrow.png`}
               alt="reshare"
             />
-          </div>
+          </div> */}
         </div>
         {showComments && (
           <div className={styles.commentBlock}>
