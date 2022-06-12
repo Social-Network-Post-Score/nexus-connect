@@ -57,7 +57,7 @@ function NavBarComponent(props) {
                         navbar
                     >
                         <NavItem>
-                            <Link to='/' className={dark?styles.darkItems:styles.lightitems}>
+                            <Link to='/' className={dark?styles.darkItems:styles.lightitems} style={userAvailable && dark ? {position:'relative',top:'20px'}:null}>
                                 <span 
                                     className={
                                         location.pathname === "/" ? dark?styles.selectedItemDark:styles.selectedItemLight : ""
@@ -67,7 +67,7 @@ function NavBarComponent(props) {
                             </Link>
                         </NavItem>
                         <NavItem>
-                            {(userAvailable && <Link to='/posts' className={dark?styles.darkItems:styles.lightitems}>
+                            {(userAvailable && <Link to='/posts' className={dark?styles.darkItems:styles.lightitems} style={userAvailable && dark ? {position:'relative',top:'20px'}:null}>
                                 <span 
                                     className={
                                         location.pathname === "/posts" ? styles.selectedItemLight : ""
@@ -77,7 +77,7 @@ function NavBarComponent(props) {
                             </Link>)}
                         </NavItem>
                         <NavItem>
-                            <Link to='/about' className={dark?styles.darkItems:styles.lightitems}>
+                            <Link to='/about' className={dark?styles.darkItems:styles.lightitems} style={userAvailable && dark ? {position:'relative',top:'20px'}:null}>
                                 <span
                                     className={
                                         location.pathname === "/about" ? styles.selectedItemLight : ""
@@ -95,7 +95,7 @@ function NavBarComponent(props) {
                                         nav
                                     >
                                         <DropdownToggle
-                                            caret
+                                            caretext
                                             nav
                                         >
                                             <span
@@ -128,7 +128,7 @@ function NavBarComponent(props) {
                                     </UncontrolledDropdown>
                                 </div>
                                 ) : (
-                                <Link to="/signup" className={dark?styles.darkItems:styles.lightitems}>
+                                <Link to="/signup" className={dark?styles.darkItems:styles.lightitems} style={userAvailable && dark ? {position:'relative',top:'20px'}:null}>
                                     <span
                                         className={
                                         location.pathname === "/signup"
