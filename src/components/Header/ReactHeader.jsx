@@ -67,14 +67,14 @@ function NavBarComponent(props) {
                             </Link>
                         </NavItem>
                         <NavItem>
-                            <Link to='/posts' className={dark?styles.darkItems:styles.lightitems}>
+                            {(userAvailable && <Link to='/posts' className={dark?styles.darkItems:styles.lightitems}>
                                 <span 
                                     className={
                                         location.pathname === "/posts" ? styles.selectedItemLight : ""
                                 }>
                                     Posts
                                 </span>
-                            </Link>
+                            </Link>)}
                         </NavItem>
                         <NavItem>
                             <Link to='/about' className={dark?styles.darkItems:styles.lightitems}>
