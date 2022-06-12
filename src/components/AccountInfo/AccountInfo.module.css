@@ -1,126 +1,135 @@
-div{
-    box-sizing: border-box;
+div {
+  box-sizing: border-box;
 }
 
-.mainContainer{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    margin:24px auto;
-    width: 800px;
-
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin: 24px auto;
+  width: 800px;
 }
 
-.rightPanel{
-    width: 700px;
+.rightPanel {
+  width: 700px;
 }
 
-.rightPanel h2{
-    color: #1f72ad;
+.rightPanel h2 {
+  color: #1f72ad;
 }
 
-.leftPanel{
-    margin-right: 32px;
-    padding-top: 50px;
+.leftPanel {
+  margin-right: 32px;
+  padding-top: 50px;
 }
 
-.formContainer{
-    height: 600px;
-    overflow: auto;
-    border-top: 2px solid #3c99dc;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+.formContainer {
+  height: 600px;
+  overflow: auto;
+  border-top: 2px solid #3c99dc;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .formContainer::-webkit-scrollbar {
-    display: none; /* chrome, opera */
+  display: none; /* chrome, opera */
 }
 
-
-.formField{
-    width: 100%;
-    margin-bottom: 16px;
+.formField {
+  width: 100%;
+  margin-bottom: 16px;
 }
 
-.userImage{
-    width: 150px;
-    height: 150px;
+.userImage {
+  width: 150px;
+  height: 150px;
 }
 
-.userImage p{
-    color: #3c99dc;
-    text-align: center;
+.userImage p {
+  color: #3c99dc;
+  text-align: center;
 }
 
-.leftPanel img{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 1px solid white;
-    background-color: rgba(128, 128, 128, 0.8);
+.leftPanel img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-color: rgba(128, 128, 128, 0.8);
 }
 
-.rightPanel form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    /* border-top: 2px solid #3c99dc; */
-    padding-top: 16px;
-    padding-right: 16px;
-    /* height: 400px;
+.rightPanel form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  /* border-top: 2px solid #3c99dc; */
+  padding-top: 16px;
+  padding-right: 16px;
+  /* height: 400px;
     overflow: auto; */
 }
 
-.formField input{
-    width: 100%;
+.formField input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background: #f7fafc;
+}
+
+.formField textarea {
+  width: 100%;
+  height: 200px;
+  border-radius: 6px;
+  padding: 4px;
+  outline: none;
+  border: none;
+  background: #f7fafc;
+}
+
+.formField label {
+  color: #08558d;
+  font-size: 16px;
+  padding: 4px;
+}
+
+.formField input:focus-visible {
+  border: 2px solid #3c99dc;
+}
+
+.formField textarea:focus-visible {
+  border: 2px solid #3c99dc;
+}
+
+.rightPanel form button {
+  padding: 4px;
+  width: 100px;
+  height: 40px;
+  border-radius: 6px;
+  margin: 6px;
+  float: right;
+  border: none;
+  background-color: #3c99dc;
+  color: white;
+  font-size: 18px;
+}
+
+.rightPanel form button:hover {
+  cursor: pointer;
+  background-color: #206ea5;
+}
+
+@media only screen and (max-width: 768px) {
+  .mainContainer {
+    max-width: 100vw;
+    width: 100vw;
     padding: 8px;
-    border-radius: 4px;
-    border: none;
-    outline: none;
-    background: #f7fafc;
-}
+    flex-direction: column;
+  }
 
-.formField textarea{
-    width:100%;
-    height: 200px;
-    border-radius:6px;
-    padding: 4px;
-    outline: none;
-    border:none;
-    background: #f7fafc;
-}
-
-.formField label{
-    color: #08558d;
-    font-size: 16px;
-    padding: 4px;
-}
-
-
-.formField input:focus-visible{
-    border: 2px solid #3c99dc;
-}
-
-.formField textarea:focus-visible{
-    border: 2px solid #3c99dc;
-
-}
-
-.rightPanel form button{
-    padding: 4px;
-    width: 100px;
-    height: 40px;
-    border-radius: 6px;
-    margin: 6px;
-    float: right;
-    border: none;
-    background-color: #3c99dc;
-    color: white;
-    font-size: 18px;
-}
-
-.rightPanel form button:hover{
-    cursor: pointer;
-    background-color: #206ea5;
+  .userImage {
+    margin-bottom: 16px;
+  }
 }
