@@ -105,7 +105,6 @@
 }
 
 .dpContainer {
-  padding: 4px !important;
   border-radius: 50%;
   background-color: none !important;
 }
@@ -115,7 +114,7 @@
   background-color: transparent !important;
 }
 
-.dropDownContainer {
+/* .dropDownContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -131,9 +130,9 @@
   padding: 4px;
   border-left: 4px solid #3c99dc;
   z-index: 2;
-}
+} */
 
-.dropDownOptions {
+/* .dropDownOptions {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -145,8 +144,40 @@
   color: black;
   font-size: 16px;
   margin-left: 6px;
-}
+} */
 
 .dropDownOptions:hover {
   color: blue;
+}
+
+.lightitems {
+  text-decoration: none;
+  color: #3c99dc;
+  padding: 20px;
+  position: relative;
+  top: 20px;
+  font-size: 18px;
+}
+
+.selectedItemLight{
+  color: #0f5298;
+}
+
+.darkItems{
+  text-decoration: none;
+  color: #b9bbba;
+  padding: 20px;
+  position: relative;
+  top: 20px;
+  font-size: 18px;
+}
+
+.selectedItemDark{
+  color: #c13028;
+}
+@media screen and (max-width: 768px){
+  .userDp{
+    margin: 20px 0 0 20px;
+    /* padding: 30px 0 0 20px; */
+  }
 }

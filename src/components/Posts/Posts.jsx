@@ -4,6 +4,7 @@ import { Bars } from "react-loader-spinner";
 import { useHistory } from "react-router-dom";
 import CreatePost from "../CreatePost/CreatePost";
 import Header from "../Header/Header";
+import NavBarComponent from "../Header/ReactHeader";
 import PostBody from "../PostBody/PostBody";
 import UserList from "../UserList/UserList";
 import styles from "./Posts.module.css";
@@ -87,9 +88,10 @@ function Posts(props) {
   return (
     <>
       <div>
-        <div style={{ boxShadow: "0 8px 6px -6px rgba(0, 0, 0, 0.271)" }}>
+        {/* <div style={{ boxShadow: "0 8px 6px -6px rgba(0, 0, 0, 0.271)" }}>
           <Header light />
-        </div>
+        </div> */}
+        <NavBarComponent />
         <CreatePost createPost={createPost} />
         <div style={{ margin: "0 auto", width: "40%" }}>
           {loader && (

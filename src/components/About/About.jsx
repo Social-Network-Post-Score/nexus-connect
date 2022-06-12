@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../Header/Header";
 import Sourav from "./sourav.jpeg";
 import Pratik from "./pratik.jpg";
 import Rohan from "./rohan.jpg";
@@ -7,13 +6,12 @@ import Keshav from "./keshav.jpg";
 import Sam from "./sam.jpeg";
 import styles from "./About.module.css";
 import Card from "../Card/Card";
+import NavBarComponent from "../Header/ReactHeader";
 
 function About() {
   return (
     <div className={styles.container}>
-      <div style={{ boxShadow: "0 8px 6px -6px rgba(0, 0, 0, 0.271)" }}>
-        <Header light />
-      </div>
+      <NavBarComponent/>
       <div
         style={{
           width: "90%",

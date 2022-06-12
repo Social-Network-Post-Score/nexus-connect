@@ -12,8 +12,6 @@ function Header(props) {
   const [user, setUser] = useState({});
   const [dpClicked, setDpClicked] = useState(false);
 
-  console.log("header:", user);
-
   let location = useLocation();
   const history = useHistory();
   const userAvailable =

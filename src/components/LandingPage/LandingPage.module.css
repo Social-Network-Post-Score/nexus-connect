@@ -11,6 +11,7 @@
 .container{
     height: 100vh;
     background-color: #c13028;
+    padding-top: 60px;
 }
 
 .landingText{
@@ -26,7 +27,7 @@
     margin-bottom: 0;
     color: #ffffff;
     padding: 15px 0px 25px 15px;
-    font-size: 100px;
+    font-size: 90px;
     text-align: left;
     font-weight: 1000 !important;
 }
@@ -42,6 +43,71 @@
 }
 
 .bodyContainer{
+    flex-wrap: wrap;
     display: flex;
     height: 92vh;
+}
+
+@media screen and (max-width: 1150px){
+    .header{
+        font-size: 80px;
+    }
+    .tagLine{
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 1150px){
+    .header{
+        font-size: 76px;
+    }
+    .tagLine{
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 980px){
+    .header{
+        font-size: 74px;
+    }
+    .tagLine{
+        font-size: 24px;
+    }
+    .imageContainer{
+        width: 50%;
+    }
+    .landingText{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 760px){
+    .header{
+        font-size: 68px;
+    }
+    .tagLine{
+        font-size: 22px;
+    }
+    .imageContainer{
+        width: 50%;
+    }
+    .landingText{
+        width: 50%;
+    }
+}
+@media screen and (max-width: 760px){
+    .header{
+        font-size: 68px;
+    }
+    .tagLine{
+        font-size: 22px;
+    }
+    .imageContainer{
+        width: 100%;
+    }
+    .landingText{
+        padding-top: 70px;
+        padding-bottom: 40px;
+        width: 100%;
+    }
 }

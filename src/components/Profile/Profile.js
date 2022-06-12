@@ -7,6 +7,7 @@ import { Bars } from "react-loader-spinner";
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import NavBarComponent from "../Header/ReactHeader";
 
 export default function Profile(props) {
   const [user, setUser] = useState(null);
@@ -94,7 +95,7 @@ export default function Profile(props) {
 
   return (
     <>
-      <Header light />
+      <NavBarComponent/>
       <div style={{ margin: "0 auto", width: "40%" }}>
         {loader && (
           <div style={{ margin: "0 auto", width: "60px", paddingTop: "20px" }}>

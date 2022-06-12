@@ -1,12 +1,14 @@
 import React from 'react';
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
+import NavBarComponent from '../Header/ReactHeader';
 import Landing from './landing.jpg'
 import styles from './LandingPage.module.css'
 
 function LandingPage() {
     return ( 
         <div className={styles.container}>
-            <Header dark/>
+            {/* <Header dark/> */}
+            <NavBarComponent dark/>
             <div className={styles.bodyContainer}>
                 <div className={styles.landingText}>
                     <p className={styles.header}>Lets Connect...</p>

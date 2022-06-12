@@ -10,6 +10,7 @@
   overflow: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  display: block;
 }
 
 .mainContainer::-webkit-scrollbar {
@@ -58,9 +59,6 @@
   padding: 8px 4px;
 }
 
-.userDp {
-}
-
 .userName {
   margin-left: 16px;
   color: #1890ff;
@@ -70,4 +68,10 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
+}
+
+@media screen and (max-width: 850px){
+  .mainContainer{
+    display: none;
+  }
 }
