@@ -192,3 +192,20 @@ h3 {
   cursor: pointer;
   background-color: rgba(233, 230, 230, 0.77);
 }
+
+@media only screen and (max-width: 768px) {
+  .mainContainer {
+    width: 100vw;
+  }
+  .content {
+    flex-direction: column;
+    max-width: 100vw;
+  }
+  .friendsContainer {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .postsContainer {
+    width: 100%;
+  }
+}
