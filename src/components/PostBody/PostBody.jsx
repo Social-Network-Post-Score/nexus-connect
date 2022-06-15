@@ -4,7 +4,7 @@ import styles from "./PostBody.module.css";
 import Loading from "./loading.gif";
 import CommentBody from "../CommentBody/CommentBody";
 import axios from "axios";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 function PostBody(props) {
   const [upvoteHover, setupvoteHover] = useState(false);
@@ -20,6 +20,7 @@ function PostBody(props) {
   const [post, setPost] = useState(props.post);
   const [upvotes, setUpvotes] = useState(props.post.upvotes);
   const [downvotes, setDownvotes] = useState(props.post.downvotes);
+  const [time, setTime] = useState(props.post.createdAt.split("T"));
 
   // let {user} = props;
   const history = useHistory();
@@ -33,8 +34,7 @@ function PostBody(props) {
       setClicked(false);
     } else {
       setErr(null);
-      props.createComment(comment, post._id)
-      .then(() => {
+      props.createComment(comment, post._id).then(() => {
         setClicked(false);
         setComment("");
         getComment(1);
@@ -102,7 +102,7 @@ function PostBody(props) {
       setupVoteSelected(false);
       post.likeUsers = post.likeUsers.replace(user._id, "");
       post.upvotes -= 1;
-      updatePost()
+      updatePost();
       return;
     }
     post.likeUsers += user._id;
@@ -124,9 +124,9 @@ function PostBody(props) {
     if (isDisLiked()) {
       setDownvotes(downvotes - 1);
       setdownVoteSelected(false);
-      post.downvotes -= 1
+      post.downvotes -= 1;
       post.dislikeUsers = post.dislikeUsers.replace(user._id, "");
-      updatePost()
+      updatePost();
       return;
     }
     post.dislikeUsers += user._id;
@@ -145,11 +145,17 @@ function PostBody(props) {
   };
 
   const handleDpClick = () => {
-    history.replace('')
-    history.push(`/profile/${post.creator}`)
-  }
+    history.replace("");
+    history.push(`/profile/${post.creator}`);
+  };
 
   useEffect(() => {
+    //let time = props.post.createdAt.split("T");
+    let newtime = time;
+    newtime[1] = newtime[1].substr(0, newtime[1].length - 5);
+    newtime[0] = newtime[0].split("-");
+    newtime[0] = newtime[0][2] + "-" + newtime[0][1] + "-" + newtime[0][0];
+    setTime(newtime);
     if (isLiked()) {
       setupVoteSelected(true);
     }
@@ -161,11 +167,6 @@ function PostBody(props) {
       setPost(props.post);
     }
   }, []);
-
-  let time = post.createdAt.split("T");
-  time[1] = time[1].substr(0, time[1].length - 5);
-  time[0] = time[0].split("-");
-  time[0] = time[0][2] + "-" + time[0][1] + "-" + time[0][0];
 
   return (
     <div style={props.style} className={styles.container}>

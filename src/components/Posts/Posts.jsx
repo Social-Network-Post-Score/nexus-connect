@@ -15,30 +15,10 @@ import styles from "./Posts.module.css";
 function Posts(props) {
   const [allPosts, setallPosts] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [openUserList, setOpenUserList] = useState(false)
+  const [openUserList, setOpenUserList] = useState(false);
   const userData = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
   const createPost = async (body) => {
-    const post = {
-      comments: 0,
-      createdAt: '',
-      creator: userData._id,
-      creatorEmail: userData.email,
-      creatorImage: userData.image,
-      creatorName: userData.name,
-      description: body,
-      dislikeUsers: "",
-      downvotes: 0,
-      likeUsers: "",
-      shares: 0,
-      title: "not-required",
-      upvotes: 0,
-      __v: 0
-    }
-    props.postSuccess();
-    let posts = allPosts;
-    posts.unshift(post)
-    setallPosts(posts)
     const data = {
       title: "not-required",
       description: body,
@@ -46,7 +26,32 @@ function Posts(props) {
     };
     await axios
       .post("https://secret-castle-58335.herokuapp.com/api/posts", data)
-      .then(() => {
+      .then((res) => {
+        console.log(res.data);
+        const post = {
+          comments: 0,
+          createdAt: res.data.post.createdAt,
+          creator: userData._id,
+          creatorEmail: userData.email,
+          creatorImage: userData.image,
+          creatorName: userData.name,
+          description: body,
+          dislikeUsers: "",
+          downvotes: 0,
+          likeUsers: "",
+          shared: false,
+          shares: 0,
+          title: "not-required",
+          upvotes: 0,
+          __v: 0,
+          _id: res.data.post._id,
+        };
+        props.postSuccess();
+        let posts = [...allPosts];
+        console.log("post before", posts);
+        posts.unshift(post);
+        console.log("post after", posts);
+        setallPosts(posts);
       })
       .catch((err) => {
         console.log(err);
@@ -73,12 +78,12 @@ function Posts(props) {
         console.log(res.data.post);
         // setLoader(false)
         let posts = allPosts;
-        for(let i=0;i<posts.length;i++){
-            if(posts[i]._id === res.data.post._id){
-                posts[i] = res.data.post
-            }
+        for (let i = 0; i < posts.length; i++) {
+          if (posts[i]._id === res.data.post._id) {
+            posts[i] = res.data.post;
+          }
         }
-        setallPosts(posts)
+        setallPosts(posts);
       })
       .catch((err) => console.log(err));
   };
@@ -124,19 +129,24 @@ function Posts(props) {
           )}
         </div>
         <div className={styles.collapseContainer}>
-          <div onClick={()=>setOpenUserList(!openUserList)} className={styles.collapseBtn}>
+          <div
+            onClick={() => setOpenUserList(!openUserList)}
+            className={styles.collapseBtn}
+          >
             <div>
               <b>Find and follow users</b>
             </div>
             <div>
-              {
-                openUserList ? <FontAwesomeIcon icon={faMinus} /> : <FontAwesomeIcon icon={faPlus} />
-              }
+              {openUserList ? (
+                <FontAwesomeIcon icon={faMinus} />
+              ) : (
+                <FontAwesomeIcon icon={faPlus} />
+              )}
             </div>
           </div>
           <Collapse isOpen={openUserList} className={styles.collapse}>
             <div className={styles.userList}>
-              <UserList side/>
+              <UserList side />
             </div>
           </Collapse>
         </div>
@@ -149,7 +159,7 @@ function Posts(props) {
             key={post._id}
             createComment={createComment}
             getPostById={getPostById}
-            user = {userData}
+            user={userData}
           />
         ))}
       </div>
