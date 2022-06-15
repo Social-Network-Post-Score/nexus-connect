@@ -153,7 +153,8 @@
 .lightitems {
   text-decoration: none;
   color: #3c99dc;
-  padding: 20px;
+  /* padding: 20px; */
+  padding-right: 20px;
   position: relative;
   top: 20px;
   font-size: 18px;
@@ -166,7 +167,8 @@
 .darkItems{
   text-decoration: none;
   color: #b9bbba;
-  padding: 20px;
+  /* padding: 20px; */
+  padding-right: 20px;
   font-size: 18px;
 }
 
@@ -175,7 +177,6 @@
 }
 @media screen and (max-width: 768px){
   .userDp{
-    margin: 20px 0 0 20px;
-    /* padding: 30px 0 0 20px; */
+    display: none;
   }
 }

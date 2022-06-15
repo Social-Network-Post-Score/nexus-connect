@@ -5,3 +5,51 @@
     font-weight: 600;
     color: rgba(0,0,0,0.6);
 }
+
+.collapseContainer{
+    width: 40%;
+    margin: 10px auto;
+    overflow: auto;
+    display: none;
+}
+
+.collapseBtn{
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #eaf3fcbc;
+    font-size: 16px;
+}
+
+.collapse{
+    height: 300px;
+    overflow: auto;
+    border: 1px solid rgba(0,0,0,0.2);
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+.collapse::-webkit-scrollbar {
+    display: none; /* chrome, opera */
+}
+  
+.userList{
+    width: 90%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 850px){
+    .collapseContainer{
+      display: block;
+      width: 70%;
+    }
+  }
+
+@media screen and (max-width: 550px){
+    .collapseContainer{
+        width: 90%
+    }
+}

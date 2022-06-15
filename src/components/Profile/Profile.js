@@ -36,7 +36,7 @@ export default function Profile(props) {
   const fetchPosts = async () => {
     const fetchPostUrl = `https://secret-castle-58335.herokuapp.com/api/posts/user/${userId}`;
     const res = await axios.get(fetchPostUrl);
-    setPosts(res.data.posts.reverse());
+    setPosts(res.data.posts);
   };
 
   const handleOnClickFollow = async () => {
@@ -77,6 +77,21 @@ export default function Profile(props) {
   const handleOnClickFriend = (id) => {
     console.log(id);
     window.location.replace(`/profile/${id}`);
+  };
+
+  const createComment = async (content, postId) => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const data = {
+      content: content,
+      creator: userData._id,
+      creatorName: userData.name,
+      post: postId,
+    };
+    console.log(data);
+    await axios
+      .post("https://secret-castle-58335.herokuapp.com/api/comments", data)
+      .then(() => props.commentSuccess())
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -182,6 +197,7 @@ export default function Profile(props) {
                       creator={user}
                       key={post._id}
                       style={{ width: "100%", marginBottom: "16px" }}
+                      createComment = {createComment}
                     />
                   ))}
                 </div>

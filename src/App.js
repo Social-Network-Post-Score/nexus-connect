@@ -55,7 +55,9 @@ function App() {
           />
         </Route>
         <Route exact path="/profile/:userId">
-          <Profile />
+          <Profile 
+            commentSuccess={commentSuccess}
+          />
         </Route>
         <Route exact path="/posts">
           <Posts

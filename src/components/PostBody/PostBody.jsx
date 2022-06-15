@@ -33,7 +33,8 @@ function PostBody(props) {
       setClicked(false);
     } else {
       setErr(null);
-      props.createComment(comment, post._id).then(() => {
+      props.createComment(comment, post._id)
+      .then(() => {
         setClicked(false);
         setComment("");
         getComment(1);
@@ -100,6 +101,8 @@ function PostBody(props) {
       setUpvotes(upvotes - 1);
       setupVoteSelected(false);
       post.likeUsers = post.likeUsers.replace(user._id, "");
+      post.upvotes -= 1;
+      updatePost()
       return;
     }
     post.likeUsers += user._id;
@@ -121,7 +124,9 @@ function PostBody(props) {
     if (isDisLiked()) {
       setDownvotes(downvotes - 1);
       setdownVoteSelected(false);
+      post.downvotes -= 1
       post.dislikeUsers = post.dislikeUsers.replace(user._id, "");
+      updatePost()
       return;
     }
     post.dislikeUsers += user._id;

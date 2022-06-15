@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import styles from "./UserList.module.css";
-export default function UserLis(props) {
+
+export default function UserList(props) {
+
   const [userList, setUserList] = useState([]);
-
   const [searchResult, setSearchResult] = useState(userList);
-  console.log("Search result: ", searchResult);
-
   const history = useHistory();
 
   const handleOnChange = (event) => {
@@ -40,8 +39,8 @@ export default function UserLis(props) {
   }, []);
 
   return (
-    <div className={styles.mainContainer}>
-      <h2>Find other users to follow.</h2>
+    <div className={props.side ? '' : styles.mainContainer}>
+      {props.side==undefined && <h2>Find other users to follow</h2>}
       <div className={styles.searchBar}>
         <input
           type="text"

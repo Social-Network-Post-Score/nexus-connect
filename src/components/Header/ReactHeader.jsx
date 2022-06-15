@@ -89,43 +89,84 @@ function NavBarComponent(props) {
                         </NavItem>
                         <NavItem>
                             {userAvailable ? (
-                                <div style={{padding:''}}>
-                                    <UncontrolledDropdown
-                                        inNavbar
-                                        nav
-                                    >
-                                        <DropdownToggle
-                                            caretext
+                                <div>
+                                    <div>
+                                        <UncontrolledDropdown
+                                            inNavbar
                                             nav
                                         >
-                                            <span
-                                                className={styles.dpContainer}
-                                                onClick={() => setDpClicked(!dpClicked)}
+                                            <DropdownToggle
+                                                caretext
+                                                nav
                                             >
-                                                <img
-                                                    src={`https://picsum.photos/seed/${user.email}/50/50`}
-                                                    alt="user dp"
-                                                    className={styles.userDp}
-                                                />
-                                            </span>
-                                        </DropdownToggle>
-                                        <div style={{width:'150px'}}>
-                                            <DropdownMenu right>
-                                                <DropdownItem>
-                                                    <div>
-                                                        <FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <a onClick={()=>handleProfileClick()}>Profile</a>
-                                                    </div>
-                                                </DropdownItem>
-                                                <DropdownItem>
-                                                    <div>
-                                                        <FontAwesomeIcon icon={faRightToBracket} />&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <a onClick={()=>handleSignOut()}>Logout</a>
-                                                    </div>
-                                                </DropdownItem>
-                                            </DropdownMenu>
-                                        </div>
-                                    </UncontrolledDropdown>
+                                                <span
+                                                    className={styles.dpContainer}
+                                                    onClick={() => setDpClicked(!dpClicked)}
+                                                >
+                                                    <img
+                                                        src={`https://picsum.photos/seed/${user.email}/50/50`}
+                                                        alt="user dp"
+                                                        className={styles.userDp}
+                                                    />
+                                                </span>
+                                            </DropdownToggle>
+                                            <div style={{width:'150px'}}>
+                                                <DropdownMenu right>
+                                                    <DropdownItem>
+                                                        <div>
+                                                            <FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a onClick={()=>handleProfileClick()}>Profile</a>
+                                                        </div>
+                                                    </DropdownItem>
+                                                    <DropdownItem>
+                                                        <div>
+                                                            <FontAwesomeIcon icon={faRightToBracket} />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a onClick={()=>handleSignOut()}>Logout</a>
+                                                        </div>
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </div>
+                                        </UncontrolledDropdown>
+                                    </div>
+                                    <div>
+                                        <UncontrolledDropdown
+                                            inNavbar
+                                            nav
+                                        >
+                                            <DropdownToggle
+                                                caretext
+                                                nav
+                                            >
+                                                <span
+                                                    className={styles.dpContainer}
+                                                    onClick={() => setDpClicked(!dpClicked)}
+                                                >
+                                                    {/* <img
+                                                        src={`https://picsum.photos/seed/${user.email}/50/50`}
+                                                        alt="user dp"
+                                                        className={styles.userDp}
+                                                    /> */}
+                                                    <p className={dark?styles.darkItems:styles.lightitems}>{user.name}</p>
+                                                </span>
+                                            </DropdownToggle>
+                                            <div style={{width:'150px'}}>
+                                                <DropdownMenu right>
+                                                    <DropdownItem>
+                                                        <div>
+                                                            <FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a onClick={()=>handleProfileClick()}>Profile</a>
+                                                        </div>
+                                                    </DropdownItem>
+                                                    <DropdownItem>
+                                                        <div>
+                                                            <FontAwesomeIcon icon={faRightToBracket} />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a onClick={()=>handleSignOut()}>Logout</a>
+                                                        </div>
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </div>
+                                        </UncontrolledDropdown>
+                                    </div>
                                 </div>
                                 ) : (
                                 <Link to="/signup" className={dark?styles.darkItems:styles.lightitems} style={userAvailable && dark ? {position:'relative',top:'20px'}:null}>
