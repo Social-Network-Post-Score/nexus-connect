@@ -154,17 +154,18 @@
   text-decoration: none;
   color: #3c99dc;
   /* padding: 20px; */
+  /* padding-top: 20px; */
   padding-right: 20px;
   position: relative;
   top: 20px;
   font-size: 18px;
 }
 
-.selectedItemLight{
+.selectedItemLight {
   color: #0f5298;
 }
 
-.darkItems{
+.darkItems {
   text-decoration: none;
   color: #b9bbba;
   /* padding: 20px; */
@@ -172,11 +173,12 @@
   font-size: 18px;
 }
 
-.selectedItemDark{
+.selectedItemDark {
   color: #c13028;
 }
-@media screen and (max-width: 768px){
-  .userDp{
-    display: none;
+@media screen and (max-width: 768px) {
+  .userDp {
+    /* display: none; */
+    margin-top: 20px;
   }
 }

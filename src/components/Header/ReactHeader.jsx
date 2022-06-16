@@ -116,7 +116,10 @@ function NavBarComponent(props) {
                 className={dark ? styles.darkItems : styles.lightitems}
                 style={
                   userAvailable && dark
-                    ? { position: "relative", top: "20px" }
+                    ? {
+                        position: "relative",
+                        top: "20px",
+                      }
                     : null
                 }
               >
@@ -137,16 +140,16 @@ function NavBarComponent(props) {
                   <div>
                     <UncontrolledDropdown inNavbar nav>
                       <DropdownToggle caretext nav>
-                        <span
+                        {/* <span
                           className={styles.dpContainer}
                           onClick={() => setDpClicked(!dpClicked)}
-                        >
-                          <img
-                            src={`https://picsum.photos/seed/${user.email}/50/50`}
-                            alt="user dp"
-                            className={styles.userDp}
-                          />
-                        </span>
+                        > */}
+                        <img
+                          src={`https://picsum.photos/seed/${user.email}/50/50`}
+                          alt="user dp"
+                          className={styles.userDp}
+                        />
+                        {/* </span> */}
                       </DropdownToggle>
                       <div style={{ width: "150px" }}>
                         <DropdownMenu right>
